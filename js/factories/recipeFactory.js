@@ -1,4 +1,4 @@
-import createElementDOM from './utils/genericDom';
+import createElementDOM from '../utils/genericDom';
 export const recipeFactory = (recipes) => {
 	const { name, time, description, ingredients } = recipes;
 	const getRecipeCardDOM = () => {
