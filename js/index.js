@@ -32,14 +32,12 @@ const displayFilterUstensils = async (data) => {
 };
 
 const init = async () => {
+	toggleLists();
 	recipes.forEach((recipe) => {
 		displayRecipes(recipe);
 		displayFilterIngredients(recipe);
 		displayFilterAppliance(recipe);
-
 		displayFilterUstensils(recipe);
-
-		toggleLists();
 	});
 };
 init();

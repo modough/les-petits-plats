@@ -4,15 +4,16 @@ export const listFactory = (data) => {
 	const { ingredients, ustensils, appliance } = data;
 
 	const getIngredientsDOM = () => {
-		let ingredientList = [];
+		const spanIngredientsList = document.createElement('span');
 		ingredients.forEach((elmt) => {
-			ingredientList = createElementDOM(
+			const ingredientsList = createElementDOM(
 				'li',
 				`${elmt.ingredient}`,
 				'ingredient'
 			);
+			spanIngredientsList.appendChild(ingredientsList);
 		});
-		return ingredientList;
+		return spanIngredientsList;
 	};
 
 	const getApplianceDOM = () => {
@@ -21,8 +22,12 @@ export const listFactory = (data) => {
 	};
 
 	const getUstensilDOM = () => {
-		const ustensilList = createElementDOM('li', `${ustensils}`, 'ustensil');
-		return ustensilList;
+		const spanUstensilList = document.createElement('span');
+		ustensils.forEach((elmt) => {
+			const ustensilList = createElementDOM('li', `${elmt}`, 'ustensil');
+			spanUstensilList.appendChild(ustensilList);
+		});
+		return spanUstensilList;
 	};
 
 	return { getIngredientsDOM, getApplianceDOM, getUstensilDOM };
