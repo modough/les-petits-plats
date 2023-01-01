@@ -1,6 +1,6 @@
 import createElementDOM from '../utils/genericDom';
-export const recipeFactory = (recipes) => {
-	const { name, time, description, ingredients } = recipes;
+export const recipeFactory = (data) => {
+	const { name, time, description, ingredients } = data;
 	const getRecipeCardDOM = () => {
 		const article = createElementDOM('article', '', 'card');
 		const imgDiv = createElementDOM('div', '', 'cardImg');
@@ -27,9 +27,9 @@ export const recipeFactory = (recipes) => {
 			`${description}`,
 			'cardRecipe'
 		);
-		const ingredientsData = ingredients;
-		ingredientsData.forEach((elmt) => {
-			const ingredients = createElementDOM('li', '', '');
+
+		ingredients.forEach((elmt) => {
+			const ingredientsLi = createElementDOM('li', '', '');
 			const ingredientName = createElementDOM(
 				'p',
 				`${elmt.ingredient}:`,
@@ -45,10 +45,10 @@ export const recipeFactory = (recipes) => {
 				elmt.unit ? `${elmt.unit}` : null,
 				'ingredientUnit'
 			);
-			ingredients.appendChild(ingredientName);
-			ingredients.appendChild(ingredientQty);
-			ingredients.appendChild(ingredientUnit);
-			ingredientsList.appendChild(ingredients);
+			ingredientsLi.appendChild(ingredientName);
+			ingredientsLi.appendChild(ingredientQty);
+			ingredientsLi.appendChild(ingredientUnit);
+			ingredientsList.appendChild(ingredientsLi);
 		});
 		article.appendChild(imgDiv);
 		article.appendChild(cardDescription);
