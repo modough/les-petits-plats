@@ -1,24 +1,13 @@
-import recipes from './data/recipes';
 import recipeFactory from './factories/recipeFactory';
 import { listFactory } from './factories/listFactory';
 import toggleLists from './utils/toggleLists';
-
-// function to avoid duplicate elements in list
-let newApplianceList = [];
-
-let uniqueAppliance = {};
-
-const noDuplicateAppliance = async () => {
-	for (let i in recipes) {
-		const objet = recipes[i]['appliance'];
-
-		uniqueAppliance[objet] = recipes[i];
-	}
-	for (let i in uniqueAppliance) {
-		newApplianceList.push(uniqueAppliance[i]);
-	}
-	return newApplianceList;
-};
+import {
+	noDuplicateAppliance,
+	noDuplicateUstensils,
+} from './utils/noDuplicateList';
+import recipes from './data/recipes';
+const newApplianceList = await noDuplicateAppliance();
+const newUstensilsList = await noDuplicateUstensils();
 
 const displayRecipes = async (data) => {
 	const section = document.querySelector('.recipesCards');
@@ -49,14 +38,15 @@ const displayFilterUstensils = async (data) => {
 
 const init = async () => {
 	toggleLists();
-	const newApplianceList = await noDuplicateAppliance();
+
 	recipes.forEach((recipe) => {
 		displayRecipes(recipe);
 		displayFilterIngredients(recipe);
-		displayFilterUstensils(recipe);
 	});
 	newApplianceList.forEach((list) => {
 		displayFilterAppliance(list);
 	});
+
+	displayFilterUstensils(newUstensilsList);
 };
 init();

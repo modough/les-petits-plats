@@ -1,7 +1,7 @@
 import createElementDOM from '../utils/genericDom';
 
 export const listFactory = (data) => {
-	const { ingredients, ustensils, appliance } = data;
+	const { ingredients, appliance } = data;
 
 	const getIngredientsDOM = () => {
 		const spanIngredientsList = document.createElement('span');
@@ -23,7 +23,7 @@ export const listFactory = (data) => {
 
 	const getUstensilDOM = () => {
 		const spanUstensilList = document.createElement('span');
-		ustensils.forEach((elmt) => {
+		data.forEach((elmt) => {
 			const ustensilList = createElementDOM('li', `${elmt}`, 'ustensil');
 			spanUstensilList.appendChild(ustensilList);
 		});
