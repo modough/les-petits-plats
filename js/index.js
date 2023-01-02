@@ -2,10 +2,12 @@ import recipeFactory from './factories/recipeFactory';
 import { listFactory } from './factories/listFactory';
 import toggleLists from './utils/toggleLists';
 import {
+	noDuplicateIngredients,
 	noDuplicateAppliance,
 	noDuplicateUstensils,
-} from './utils/noDuplicateList';
+} from './data/noDuplicateList';
 import recipes from './data/recipes';
+const newIngredientsList = await noDuplicateIngredients();
 const newApplianceList = await noDuplicateAppliance();
 const newUstensilsList = await noDuplicateUstensils();
 
@@ -38,15 +40,13 @@ const displayFilterUstensils = async (data) => {
 
 const init = async () => {
 	toggleLists();
-
-	recipes.forEach((recipe) => {
-		displayRecipes(recipe);
-		displayFilterIngredients(recipe);
-	});
+	displayFilterIngredients(newIngredientsList);
+	displayFilterUstensils(newUstensilsList);
 	newApplianceList.forEach((list) => {
 		displayFilterAppliance(list);
 	});
-
-	displayFilterUstensils(newUstensilsList);
+	recipes.forEach((recipe) => {
+		displayRecipes(recipe);
+	});
 };
 init();
