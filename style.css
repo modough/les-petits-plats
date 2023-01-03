@@ -159,6 +159,12 @@ ul.active::-webkit-scrollbar {
 .ingredient::first-letter {
 	text-transform: uppercase;
 }
+.appliance:hover,
+.ustensil:hover,
+.ingredient:hover {
+	background-color: grey;
+}
+
 .ustensiles-results {
 	position: relative;
 	background-color: #ed6454;

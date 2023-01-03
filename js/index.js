@@ -7,6 +7,7 @@ import {
 	noDuplicateUstensils,
 } from './data/noDuplicateList';
 import recipes from './data/recipes';
+import filter from './utils/filter';
 const newIngredientsList = await noDuplicateIngredients();
 const newApplianceList = await noDuplicateAppliance();
 const newUstensilsList = await noDuplicateUstensils();
@@ -48,5 +49,6 @@ const init = async () => {
 	recipes.forEach((recipe) => {
 		displayRecipes(recipe);
 	});
+	filter();
 };
 init();

@@ -5,6 +5,7 @@ export const recipeFactory = (data) => {
 		const article = createElementDOM('article', '', 'card');
 		const imgDiv = createElementDOM('div', '', 'cardImg');
 		const cardDescription = createElementDOM('div', '', 'cardDescription');
+
 		const cardDescriptionTop = createElementDOM(
 			'div',
 			'',
@@ -32,7 +33,7 @@ export const recipeFactory = (data) => {
 			const ingredientsLi = createElementDOM('li', '', '');
 			const ingredientName = createElementDOM(
 				'p',
-				`${elmt.ingredient}:`,
+				`${elmt.ingredient}` + ':',
 				'ingredientName'
 			);
 			const ingredientQty = createElementDOM(

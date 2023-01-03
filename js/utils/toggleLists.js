@@ -25,51 +25,75 @@ export const toggleLists = () => {
 		const iconDownUstensils = document.querySelector(
 			'.ustensiles-results .fas.fa-angle-down'
 		);
-
-		searchIngredients.addEventListener('click', () => {
-			ingredientsList.classList.add('active');
-			if (ingredientsList.classList.contains('active')) {
-				applianceList.classList.remove('active');
-				ustensilsList.classList.remove('active');
-				iconUpIngredients.classList.add('active');
-				iconDownIngredients.classList.remove('active');
-				iconUpAppliance.classList.remove('active');
-				iconDownAppliance.classList.add('active');
-				iconUpUstensils.classList.remove('active');
-				iconDownUstensils.classList.add('active');
+		//generic function
+		const handleOpen = (
+			list,
+			otherList,
+			anotherList,
+			upIcon,
+			downIcon,
+			otherListUpIcon,
+			otherListDownIcon,
+			anotherListUpIcon,
+			anotherListDowIcon
+		) => {
+			list.classList.add('active');
+			if (list.classList.contains('active')) {
+				otherList.classList.remove('active');
+				anotherList.classList.remove('active');
+				upIcon.classList.add('active');
+				downIcon.classList.remove('active');
+				otherListUpIcon.classList.remove('active');
+				otherListDownIcon.classList.add('active');
+				anotherListUpIcon.classList.remove('active');
+				anotherListDowIcon.classList.add('active');
 			}
+		};
+		// on click events
+		searchIngredients.addEventListener('click', () => {
+			handleOpen(
+				ingredientsList,
+				applianceList,
+				ustensilsList,
+				iconUpIngredients,
+				iconDownIngredients,
+				iconUpAppliance,
+				iconDownAppliance,
+				iconUpUstensils,
+				iconDownUstensils
+			);
 		});
 
 		searchAppliance.addEventListener('click', () => {
-			applianceList.classList.add('active');
-			if (applianceList.classList.contains('active')) {
-				ingredientsList.classList.remove('active');
-				ustensilsList.classList.remove('active');
-				iconUpAppliance.classList.add('active');
-				iconDownAppliance.classList.remove('active');
-				iconUpIngredients.classList.remove('active');
-				iconDownIngredients.classList.add('active');
-				iconUpUstensils.classList.remove('active');
-				iconDownUstensils.classList.add('active');
-			}
+			handleOpen(
+				applianceList,
+				ingredientsList,
+				ustensilsList,
+				iconUpAppliance,
+				iconDownAppliance,
+				iconUpIngredients,
+				iconDownIngredients,
+				iconUpUstensils,
+				iconDownUstensils
+			);
 		});
 
 		searchUstensils.addEventListener('click', () => {
-			ustensilsList.classList.add('active');
-			if (ustensilsList.classList.contains('active')) {
-				applianceList.classList.remove('active');
-				ingredientsList.classList.remove('active');
-				iconUpUstensils.classList.add('active');
-				iconDownUstensils.classList.remove('active');
-				iconUpAppliance.classList.remove('active');
-				iconDownAppliance.classList.add('active');
-				iconUpIngredients.classList.remove('active');
-				iconDownIngredients.classList.add('active');
-			}
+			handleOpen(
+				ustensilsList,
+				applianceList,
+				ingredientsList,
+				iconUpUstensils,
+				iconDownUstensils,
+				iconUpAppliance,
+				iconDownAppliance,
+				iconUpIngredients,
+				iconDownIngredients
+			);
 		});
 	};
 	// close lists function
-	const closeList = () => {
+	const closeLists = () => {
 		const iconIngredientsList = document.querySelector(
 			'.ingredients-results .fas.fa-angle-up'
 		);
@@ -95,35 +119,57 @@ export const toggleLists = () => {
 		const searchAppliance = document.querySelector('#appareils-search');
 		const searchUstensils = document.querySelector('#ustensiles-search');
 
+		// generic function
+		const handleClose = (
+			list,
+			searchInList,
+			searchInSecondList,
+			searchInThirdList,
+			iconUp,
+			iconDown
+		) => {
+			list.classList.remove('active');
+			searchInList.classList.add('active');
+			searchInSecondList.classList.add('active');
+			searchInThirdList.classList.add('active');
+			iconUp.classList.remove('active');
+			iconDown.classList.add('active');
+		};
 		// onclick events
 		iconIngredientsList.addEventListener('click', () => {
-			ingredientsList.classList.remove('active');
-			searchIngredients.classList.add('active');
-			searchAppliance.classList.add('active');
-			searchUstensils.classList.add('active');
-			iconIngredientsList.classList.remove('active');
-			iconDownIngredients.classList.add('active');
+			handleClose(
+				ingredientsList,
+				searchIngredients,
+				searchAppliance,
+				searchUstensils,
+				iconIngredientsList,
+				iconDownIngredients
+			);
 		});
 
 		iconAppareilsList.addEventListener('click', () => {
-			applianceList.classList.remove('active');
-			searchAppliance.classList.add('active');
-			searchIngredients.classList.add('active');
-			searchUstensils.classList.add('active');
-			iconAppareilsList.classList.remove('active');
-			iconDownAppliance.classList.add('active');
+			handleClose(
+				applianceList,
+				searchAppliance,
+				searchIngredients,
+				searchUstensils,
+				iconAppareilsList,
+				iconDownAppliance
+			);
 		});
 
 		iconUstensilsList.addEventListener('click', () => {
-			ustensilsList.classList.remove('active');
-			searchUstensils.classList.add('active');
-			searchAppliance.classList.add('active');
-			searchIngredients.classList.add('active');
-			iconUstensilsList.classList.remove('active');
-			iconDownUstensils.classList.add('active');
+			handleClose(
+				ustensilsList,
+				searchUstensils,
+				searchAppliance,
+				searchIngredients,
+				iconUstensilsList,
+				iconDownUstensils
+			);
 		});
 	};
 	openLists();
-	closeList();
+	closeLists();
 };
 export default toggleLists;
