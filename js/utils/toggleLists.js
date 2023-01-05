@@ -5,8 +5,8 @@ export const toggleLists = () => {
 		const searchAppliance = document.querySelector('#appareils-search');
 		const searchUstensils = document.querySelector('#ustensiles-search');
 		const ingredientsList = document.querySelector('.ingredients-results-list');
-		const applianceList = document.querySelector('.appareils-results-list');
-		const ustensilsList = document.querySelector('.ustensiles-results-list');
+		const applianceList = document.querySelector('.appliance-results-list');
+		const ustensilsList = document.querySelector('.ustensils-results-list');
 		const iconUpIngredients = document.querySelector(
 			'.ingredients-results .fas.fa-angle-up'
 		);
@@ -104,8 +104,8 @@ export const toggleLists = () => {
 			'.ustensiles-results .fas.fa-angle-up'
 		);
 		const ingredientsList = document.querySelector('.ingredients-results-list');
-		const applianceList = document.querySelector('.appareils-results-list');
-		const ustensilsList = document.querySelector('.ustensiles-results-list');
+		const applianceList = document.querySelector('.appliance-results-list');
+		const ustensilsList = document.querySelector('.ustensils-results-list');
 		const iconDownIngredients = document.querySelector(
 			'.ingredients-results .fas.fa-angle-down'
 		);

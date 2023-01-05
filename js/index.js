@@ -1,16 +1,8 @@
 import recipeFactory from './factories/recipeFactory';
 import { listFactory } from './factories/listFactory';
 import toggleLists from './utils/toggleLists';
-import {
-	noDuplicateIngredients,
-	noDuplicateAppliance,
-	noDuplicateUstensils,
-} from './data/noDuplicateList';
 import recipes from './data/recipes';
 import filter from './utils/filter';
-const newIngredientsList = await noDuplicateIngredients();
-const newApplianceList = await noDuplicateAppliance();
-const newUstensilsList = await noDuplicateUstensils();
 
 const displayRecipes = async (data) => {
 	const section = document.querySelector('.recipesCards');
@@ -19,36 +11,31 @@ const displayRecipes = async (data) => {
 	section.appendChild(recipeCardDOM);
 };
 
-const displayFilterIngredients = async (data) => {
-	const parentDiv = document.querySelector('.ingredients-results-list');
-	const ingredientModel = listFactory(data);
-	const ingredientCardDOM = ingredientModel.getIngredientsDOM();
-	parentDiv.appendChild(ingredientCardDOM);
-};
-
-const displayFilterAppliance = async (data) => {
-	const parentDiv = document.querySelector('.appareils-results-list');
-	const applianceModel = listFactory(data);
-	const applianceCardDOM = applianceModel.getApplianceDOM();
-	parentDiv.appendChild(applianceCardDOM);
-};
-const displayFilterUstensils = async (data) => {
-	const parentDiv = document.querySelector('.ustensiles-results-list');
-	const ustensilsModel = listFactory(data);
-	const ustensilsCardDOM = ustensilsModel.getUstensilDOM();
-	parentDiv.appendChild(ustensilsCardDOM);
+const displayFilter = (data, type, isNested = true, attribute = null) => {
+	const parentDiv = document.querySelector(`.${type}-results-list`);
+	const flatArray = data
+		.map((recipe) => {
+			if (isNested) {
+				return recipe[type].map((i) => (attribute ? i[attribute] : i));
+			}
+			return recipe[type];
+		})
+		.flat();
+	console.log(flatArray);
+	const arrayWithoutDuplicate = [...new Set(flatArray)];
+	const model = listFactory(arrayWithoutDuplicate, type);
+	const cardDOM = model.getListDOM();
+	parentDiv.appendChild(cardDOM);
 };
 
 const init = async () => {
-	toggleLists();
-	displayFilterIngredients(newIngredientsList);
-	displayFilterUstensils(newUstensilsList);
-	newApplianceList.forEach((list) => {
-		displayFilterAppliance(list);
-	});
 	recipes.forEach((recipe) => {
 		displayRecipes(recipe);
 	});
+	toggleLists();
+	displayFilter(recipes, 'ingredients', true, 'ingredient');
+	displayFilter(recipes, 'appliance', false);
+	displayFilter(recipes, 'ustensils');
 	filter();
 };
 init();
