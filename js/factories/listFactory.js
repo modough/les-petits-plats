@@ -8,7 +8,7 @@ export const listFactory = (data, type) => {
 			`span${type.charAt(0).toUpperCase() + type.slice(1)}List`
 		);
 		data.forEach((elmt) => {
-			const list = createElementDOM('li', elmt, 'ingredient');
+			const list = createElementDOM('li', elmt, type);
 			spanList.appendChild(list);
 		});
 		return spanList;

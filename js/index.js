@@ -4,7 +4,7 @@ import toggleLists from './utils/toggleLists';
 import recipes from './data/recipes';
 import filter from './utils/filter';
 
-const displayRecipes = async (data) => {
+export const displayRecipes = (data) => {
 	const section = document.querySelector('.recipesCards');
 	const recipeModel = recipeFactory(data);
 	const recipeCardDOM = recipeModel.getRecipeCardDOM();
@@ -21,14 +21,14 @@ const displayFilter = (data, type, isNested = true, attribute = null) => {
 			return recipe[type];
 		})
 		.flat();
-	console.log(flatArray);
+
 	const arrayWithoutDuplicate = [...new Set(flatArray)];
 	const model = listFactory(arrayWithoutDuplicate, type);
 	const cardDOM = model.getListDOM();
 	parentDiv.appendChild(cardDOM);
 };
 
-const init = async () => {
+const init = () => {
 	recipes.forEach((recipe) => {
 		displayRecipes(recipe);
 	});
