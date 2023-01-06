@@ -156,8 +156,8 @@ ul.active::-webkit-scrollbar {
 	color: white;
 }
 .appliance::first-letter,
-.ustensil::first-letter,
-.ingredient::first-letter {
+.ustensils::first-letter,
+.ingredients::first-letter {
 	text-transform: uppercase;
 }
 .appliance:hover,
@@ -177,7 +177,7 @@ ul.active::-webkit-scrollbar {
 }
 
 /*-----Main / section recipes-----*/
-.recipesCards {
+.recipesParentDiv {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 	gap: 50px;

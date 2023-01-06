@@ -13,7 +13,6 @@ export const listFactory = (data, type) => {
 		});
 		return spanList;
 	};
-
 	return { getListDOM };
 };
 export default listFactory;

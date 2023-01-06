@@ -6,7 +6,11 @@ import filter from './utils/filter';
 
 export const displayRecipes = (data) => {
 	const section = document.querySelector('.recipesCards');
-	const recipeModel = recipeFactory(data);
+	section.innerHTML = '';
+	const dataRecipes = data.map((elmt) => {
+		return elmt;
+	});
+	const recipeModel = recipeFactory(dataRecipes);
 	const recipeCardDOM = recipeModel.getRecipeCardDOM();
 	section.appendChild(recipeCardDOM);
 };
@@ -29,13 +33,11 @@ const displayFilter = (data, type, isNested = true, attribute = null) => {
 };
 
 const init = () => {
-	recipes.forEach((recipe) => {
-		displayRecipes(recipe);
-	});
-	toggleLists();
+	displayRecipes(recipes);
 	displayFilter(recipes, 'ingredients', true, 'ingredient');
 	displayFilter(recipes, 'appliance', false);
 	displayFilter(recipes, 'ustensils');
+	toggleLists();
 	filter();
 };
 init();
