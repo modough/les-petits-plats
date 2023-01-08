@@ -32,7 +32,7 @@ export const recipeFactory = (data) => {
 				const ingredientsLi = createElementDOM('li', '', '');
 				const ingredientName = createElementDOM(
 					'p',
-					`${elmt.ingredient}`,
+					`${elmt.ingredient}:`,
 					'ingredientName'
 				);
 				const ingredientQty = createElementDOM(

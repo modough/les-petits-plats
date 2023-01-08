@@ -1,15 +1,14 @@
-import { displayRecipes } from '../index';
-import recipes from '../data/recipes';
+import { displayRecipes, displayFilter } from '../index';
 
-export const filter = () => {
-	const listIngredients = document.querySelectorAll('.ingredients');
-	const listAppliances = document.querySelectorAll('.appliance');
-	const listUstensils = document.querySelectorAll('.ustensils');
-	listIngredients.forEach((elmt) => {
-		elmt.addEventListener('click', (e) => {
-			const elementValue = e.target.innerHTML.toLowerCase();
+export const filter = (data, type) => {
+	const list = document.querySelectorAll(`.${type}`);
+	const searchInput = document.querySelector(`#${type}-search`);
 
-			const filteredArray = recipes.filter((recipe) => {
+	// functions for filtering
+	const filterList = (elementValue) => {
+		console.log(elementValue);
+		const filteredArray = data.filter((recipe) => {
+			if (type === 'ingredients') {
 				return (
 					recipe.ingredients.forEach((elmt) =>
 						elmt.ingredient.toLowerCase().includes(elementValue)
@@ -17,37 +16,59 @@ export const filter = () => {
 					recipe.description.toLowerCase().includes(elementValue) ||
 					recipe.name.toLowerCase().includes(elementValue)
 				);
-			});
-			displayRecipes(filteredArray);
-		});
-	});
-	listAppliances.forEach((elmt) => {
-		elmt.addEventListener('click', (e) => {
-			const elementValue = e.target.innerHTML.toLowerCase();
-			const filteredArray = recipes.filter((recipe) => {
-				return (
-					recipe.appliance.toLowerCase().includes(elementValue) ||
-					recipe.description.toLowerCase().includes(elementValue) ||
-					recipe.name.toLowerCase().includes(elementValue)
-				);
-			});
-			displayRecipes(filteredArray);
-		});
-	});
-	listUstensils.forEach((elmt) => {
-		elmt.addEventListener('click', (e) => {
-			const elementValue = e.target.innerHTML.toLowerCase();
-			console.log(elementValue);
-			const filteredArray = recipes.filter((recipe) => {
+			} else if (type === 'ustensils') {
 				return (
 					recipe.ustensils.includes(elementValue) ||
 					recipe.description.toLowerCase().includes(elementValue) ||
 					recipe.name.toLowerCase().includes(elementValue)
 				);
-			});
-			console.log(filteredArray);
-			displayRecipes(filteredArray);
+			}
+			return (
+				recipe.appliance.toLowerCase().includes(elementValue) ||
+				recipe.description.toLowerCase().includes(elementValue) ||
+				recipe.name.toLowerCase().includes(elementValue)
+			);
 		});
+		displayRecipes(filteredArray);
+	};
+
+	const filterInput = (elementValue) => {
+		const filterAppliance = data.filter((recipe) => {
+			if (type === 'appliance') {
+				return recipe.appliance.toLowerCase().includes(elementValue);
+			}
+		});
+		displayFilter(filterAppliance, 'appliance', false);
+
+		const filterIngredients = data.filter((recipe) => {
+			if (type === 'ingredients') {
+				return recipe.ingredients.forEach((elmt) => {
+					elmt.ingredient.toLowerCase().includes(elementValue);
+				});
+			}
+		});
+		displayFilter(filterIngredients, 'ingredients', true, 'ingredient');
+
+		const filterUstensils = data.filter((recipe) => {
+			if (type === 'ustensils') {
+				return recipe.ustensils.forEach((elmt) => {
+					elmt.toLowerCase().includes(elementValue);
+				});
+			}
+		});
+		displayFilter(filterUstensils, 'ustensils');
+	};
+
+	//eventListeners
+	list.forEach((elmt) => {
+		elmt.addEventListener('click', (e) => {
+			const elementValue = e.target.innerHTML.toLowerCase();
+			filterList(elementValue);
+		});
+	});
+	searchInput.addEventListener('keyup', (e) => {
+		const elementValue = e.target.value.toLowerCase();
+		filterInput(elementValue);
 	});
 };
 export default filter;

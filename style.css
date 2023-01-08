@@ -39,7 +39,8 @@ body {
 	font-family: 'Lato', sans-serif;
 	font-weight: 400;
 	font-size: 18px;
-	opacity: 0.25;
+	opacity: 0.9;
+	padding-left: 15px;
 }
 .fa-magnifying-glass {
 	position: absolute;
@@ -114,13 +115,13 @@ body {
 	background-color: #3282f7;
 }
 
-.appareils-results {
+.appliance-results {
 	position: relative;
 	background-color: #68d9a4;
 	padding: 20px;
 }
 
-.appareils-results input,
+.appliance-results input,
 .appliance-results-list {
 	background-color: #68d9a4;
 }
@@ -161,17 +162,17 @@ ul.active::-webkit-scrollbar {
 	text-transform: uppercase;
 }
 .appliance:hover,
-.ustensil:hover,
-.ingredient:hover {
+.ustensils:hover,
+.ingredients:hover {
 	background-color: grey;
 }
 
-.ustensiles-results {
+.ustensils-results {
 	position: relative;
 	background-color: #ed6454;
 	padding: 20px;
 }
-.ustensiles-results input,
+.ustensils-results input,
 .ustensils-results-list {
 	background-color: #ed6454;
 }

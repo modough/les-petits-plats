@@ -2,8 +2,8 @@ export const toggleLists = () => {
 	//open the lists function
 	const openLists = () => {
 		const searchIngredients = document.querySelector('#ingredients-search');
-		const searchAppliance = document.querySelector('#appareils-search');
-		const searchUstensils = document.querySelector('#ustensiles-search');
+		const searchAppliance = document.querySelector('#appliance-search');
+		const searchUstensils = document.querySelector('#ustensils-search');
 		const ingredientsList = document.querySelector('.ingredients-results-list');
 		const applianceList = document.querySelector('.appliance-results-list');
 		const ustensilsList = document.querySelector('.ustensils-results-list');
@@ -11,19 +11,19 @@ export const toggleLists = () => {
 			'.ingredients-results .fas.fa-angle-up'
 		);
 		const iconUpAppliance = document.querySelector(
-			'.appareils-results .fas.fa-angle-up'
+			'.appliance-results .fas.fa-angle-up'
 		);
 		const iconUpUstensils = document.querySelector(
-			'.ustensiles-results .fas.fa-angle-up'
+			'.ustensils-results .fas.fa-angle-up'
 		);
 		const iconDownIngredients = document.querySelector(
 			'.ingredients-results .fas.fa-angle-down'
 		);
 		const iconDownAppliance = document.querySelector(
-			'.appareils-results .fas.fa-angle-down'
+			'.appliance-results .fas.fa-angle-down'
 		);
 		const iconDownUstensils = document.querySelector(
-			'.ustensiles-results .fas.fa-angle-down'
+			'.ustensils-results .fas.fa-angle-down'
 		);
 		//generic function
 		const handleOpen = (
@@ -98,10 +98,10 @@ export const toggleLists = () => {
 			'.ingredients-results .fas.fa-angle-up'
 		);
 		const iconAppareilsList = document.querySelector(
-			'.appareils-results .fas.fa-angle-up'
+			'.appliance-results .fas.fa-angle-up'
 		);
 		const iconUstensilsList = document.querySelector(
-			'.ustensiles-results .fas.fa-angle-up'
+			'.ustensils-results .fas.fa-angle-up'
 		);
 		const ingredientsList = document.querySelector('.ingredients-results-list');
 		const applianceList = document.querySelector('.appliance-results-list');
@@ -110,14 +110,14 @@ export const toggleLists = () => {
 			'.ingredients-results .fas.fa-angle-down'
 		);
 		const iconDownAppliance = document.querySelector(
-			'.appareils-results .fas.fa-angle-down'
+			'.appliance-results .fas.fa-angle-down'
 		);
 		const iconDownUstensils = document.querySelector(
-			'.ustensiles-results .fas.fa-angle-down'
+			'.ustensils-results .fas.fa-angle-down'
 		);
 		const searchIngredients = document.querySelector('#ingredients-search');
-		const searchAppliance = document.querySelector('#appareils-search');
-		const searchUstensils = document.querySelector('#ustensiles-search');
+		const searchAppliance = document.querySelector('#appliance-search');
+		const searchUstensils = document.querySelector('#ustensils-search');
 
 		// generic function
 		const handleClose = (

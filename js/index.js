@@ -15,8 +15,15 @@ export const displayRecipes = (data) => {
 	section.appendChild(recipeCardDOM);
 };
 
-const displayFilter = (data, type, isNested = true, attribute = null) => {
+export const displayFilter = (
+	data,
+	type,
+	isNested = true,
+	attribute = null
+) => {
 	const parentDiv = document.querySelector(`.${type}-results-list`);
+
+	parentDiv.innerHTML = '';
 	const flatArray = data
 		.map((recipe) => {
 			if (isNested) {
@@ -27,6 +34,7 @@ const displayFilter = (data, type, isNested = true, attribute = null) => {
 		.flat();
 
 	const arrayWithoutDuplicate = [...new Set(flatArray)];
+
 	const model = listFactory(arrayWithoutDuplicate, type);
 	const cardDOM = model.getListDOM();
 	parentDiv.appendChild(cardDOM);
@@ -38,6 +46,8 @@ const init = () => {
 	displayFilter(recipes, 'appliance', false);
 	displayFilter(recipes, 'ustensils');
 	toggleLists();
-	filter();
+	filter(recipes, 'ingredients');
+	filter(recipes, 'appliance');
+	filter(recipes, 'ustensils');
 };
 init();
