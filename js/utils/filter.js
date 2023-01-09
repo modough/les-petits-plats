@@ -6,16 +6,29 @@ export const filter = (data, type) => {
 
 	// functions for filtering
 	const filterList = (elementValue) => {
-		console.log(elementValue);
+		displayRecipes(
+			data.filter(
+				(recipe) =>
+					recipe.description.toLowerCase().includes(elementValue) ||
+					recipe.name.toLowerCase().includes(elementValue) ||
+					recipe.appliance.toLowerCase().includes(elementValue) ||
+					recipe.ustensils.includes(elementValue) ||
+					recipe.ingredients.map((ingredient) => {
+						ingredient.ingredient.toLowerCase().includes(elementValue);
+						console.log(ingredient.ingredient);
+						console.log(elementValue);
+					})
+			)
+		);
+		console.log(displayRecipes);
+		/*
 		const filteredArray = data.filter((recipe) => {
 			if (type === 'ingredients') {
-				return (
-					recipe.ingredients.forEach((elmt) =>
-						elmt.ingredient.toLowerCase().includes(elementValue)
-					) ||
-					recipe.description.toLowerCase().includes(elementValue) ||
-					recipe.name.toLowerCase().includes(elementValue)
-				);
+				recipe.ingredients.includes((elmt) => {
+					console.log(elmt.ingredient);
+					console.log(elementValue);
+					return elmt.ingredient.toLowerCase().includes(elementValue);
+				});
 			} else if (type === 'ustensils') {
 				return (
 					recipe.ustensils.includes(elementValue) ||
@@ -30,30 +43,35 @@ export const filter = (data, type) => {
 			);
 		});
 		displayRecipes(filteredArray);
+		console.log(filteredArray);*/
 	};
 
-	const filterInput = (elementValue) => {
+	const filterInput = (inputValue) => {
 		const filterAppliance = data.filter((recipe) => {
 			if (type === 'appliance') {
-				return recipe.appliance.toLowerCase().includes(elementValue);
+				return recipe.appliance.toLowerCase().includes(inputValue);
 			}
 		});
 		displayFilter(filterAppliance, 'appliance', false);
 
 		const filterIngredients = data.filter((recipe) => {
 			if (type === 'ingredients') {
-				return recipe.ingredients.forEach((elmt) => {
-					elmt.ingredient.toLowerCase().includes(elementValue);
+				let ingredientToLowerCase;
+				recipe.ingredients.forEach((elmt) => {
+					ingredientToLowerCase = elmt.ingredient.toLowerCase();
 				});
+				return ingredientToLowerCase.includes(inputValue);
 			}
 		});
 		displayFilter(filterIngredients, 'ingredients', true, 'ingredient');
 
 		const filterUstensils = data.filter((recipe) => {
 			if (type === 'ustensils') {
-				return recipe.ustensils.forEach((elmt) => {
-					elmt.toLowerCase().includes(elementValue);
+				let ustensilsToLowerCase;
+				recipe.ustensils.forEach((elmt) => {
+					ustensilsToLowerCase = elmt.toLowerCase();
 				});
+				return ustensilsToLowerCase.includes(inputValue);
 			}
 		});
 		displayFilter(filterUstensils, 'ustensils');
@@ -67,8 +85,8 @@ export const filter = (data, type) => {
 		});
 	});
 	searchInput.addEventListener('keyup', (e) => {
-		const elementValue = e.target.value.toLowerCase();
-		filterInput(elementValue);
+		const inputValue = e.target.value.toLowerCase();
+		filterInput(inputValue);
 	});
 };
 export default filter;
