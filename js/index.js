@@ -22,8 +22,8 @@ export const displayFilter = (
 	attribute = null
 ) => {
 	const parentDiv = document.querySelector(`.${type}-results-list`);
-
 	parentDiv.innerHTML = '';
+
 	const flatArray = data
 		.map((recipe) => {
 			if (isNested) {
@@ -34,7 +34,6 @@ export const displayFilter = (
 		.flat();
 
 	const arrayWithoutDuplicate = [...new Set(flatArray)];
-
 	const model = listFactory(arrayWithoutDuplicate, type);
 	const cardDOM = model.getListDOM();
 	parentDiv.appendChild(cardDOM);
