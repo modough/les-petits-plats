@@ -41,12 +41,13 @@ export const displayFilter = (
 
 const init = () => {
 	displayRecipes(recipes);
-	displayFilter(recipes, 'ingredients', true, 'ingredient');
-	displayFilter(recipes, 'appliance', false);
-	displayFilter(recipes, 'ustensils');
+
 	toggleLists();
 	filter(recipes, 'ingredients');
 	filter(recipes, 'appliance');
 	filter(recipes, 'ustensils');
+	displayFilter(recipes, 'ingredients', true, 'ingredient');
+	displayFilter(recipes, 'appliance', false);
+	displayFilter(recipes, 'ustensils');
 };
 init();

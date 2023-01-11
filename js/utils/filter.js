@@ -36,17 +36,20 @@ export const filter = (data, type) => {
 	searchInput.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
 		console.log(inputValue);
+
 		const filterInput = data.filter(
 			(recipe) =>
-				recipe.ustensils
-					.map((elmt) => elmt.toLowerCase())
-					.includes(inputValue) ||
+				recipe.ustensils.some((elmt) =>
+					elmt.toLowerCase().includes(inputValue)
+				) ||
 				recipe.appliance.toLowerCase().includes(inputValue) ||
-				recipe.ingredients
-					.map((elmt) => elmt.ingredient.toLowerCase())
-					.includes(inputValue)
+				recipe.ingredients.some((elmt) =>
+					elmt.ingredient.toLowerCase().includes(inputValue)
+				)
 		);
+
 		console.log(filterInput);
+
 		displayFilter(filterInput, 'appliance', false);
 		displayFilter(filterInput, 'ustensils');
 		displayFilter(filterInput, 'ingredients', true, 'ingredient');
