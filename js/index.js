@@ -15,39 +15,31 @@ export const displayRecipes = (data) => {
 	section.appendChild(recipeCardDOM);
 };
 
-export const displayFilter = (
-	data,
-	type,
-	isNested = true,
-	attribute = null
-) => {
+
+//reinject new list
+export const buildListDOM = (element, type) => {
 	const parentDiv = document.querySelector(`.${type}-results-list`);
 	parentDiv.innerHTML = '';
+	parentDiv.appendChild(element);
+};
 
-	const flatArray = data
-		.map((recipe) => {
-			if (isNested) {
-				return recipe[type].map((i) => (attribute ? i[attribute] : i));
-			}
-			return recipe[type];
-		})
-		.flat();
-
-	const arrayWithoutDuplicate = [...new Set(flatArray)];
-	const model = listFactory(arrayWithoutDuplicate, type);
-	const cardDOM = model.getListDOM();
-	parentDiv.appendChild(cardDOM);
+export const displayFilter = (data,
+	type,
+) => {
+	const model = listFactory(data, type);
+	model.createFlatList();
+	const linkDOM = model.getListDOM();
+	buildListDOM(linkDOM, type);
 };
 
 const init = () => {
 	displayRecipes(recipes);
-
+	displayFilter(recipes, 'ingredients');
+	displayFilter(recipes, 'appliance');
+	displayFilter(recipes, 'ustensils');
 	toggleLists();
 	filter(recipes, 'ingredients');
 	filter(recipes, 'appliance');
 	filter(recipes, 'ustensils');
-	displayFilter(recipes, 'ingredients', true, 'ingredient');
-	displayFilter(recipes, 'appliance', false);
-	displayFilter(recipes, 'ustensils');
 };
 init();

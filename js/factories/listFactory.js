@@ -13,6 +13,25 @@ export const listFactory = (data, type) => {
 		});
 		return spanList;
 	};
-	return { getListDOM };
+	const createFlatList = () => {
+		const flatArray = data
+			.map((recipe) => {
+				if (type === 'ingredients') {
+					return recipe[type].map((i) => i.ingredient.toLowerCase());
+				}
+				if (type === 'ustensils') {
+					return recipe[type].map((i) => i.toLowerCase());
+				}
+				return recipe[type].toLowerCase();
+
+			})
+			.flat();
+
+		data = [...new Set(flatArray)];
+		return data;
+
+	};
+
+	return { getListDOM, createFlatList };
 };
 export default listFactory;

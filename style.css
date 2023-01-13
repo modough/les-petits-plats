@@ -181,7 +181,8 @@ ul.active::-webkit-scrollbar {
 
 .appliance,
 .ustensils,
-.ingredients {
+.ingredients,
+.ingredient {
 	color: white;
 }
 .appliance::first-letter,
@@ -191,7 +192,8 @@ ul.active::-webkit-scrollbar {
 }
 .appliance:hover,
 .ustensils:hover,
-.ingredients:hover {
+.ingredients:hover,
+.ingredient:hover {
 	background-color: grey;
 }
 

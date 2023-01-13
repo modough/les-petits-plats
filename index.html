@@ -1,69 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="style.css" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-        <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        />
-        <title>Les petits plats</title>
-    </head>
-    <body>
-        <header class="header">
-            <h1 class="logo">
-                <img class="logoImg" src="./assets/logo.png" alt="Logo"/>
-            </h1>
-            <div class="searchBar" >
-                <input class="searchBarInput" type="text" placeholder="Rechercher une recette">
-                <i class="fas fa-magnifying-glass"></i>
-            </div>
-        </header>
-        <main>
-            <section id="filter" class="filter">
-                <div id="popup" class="popup">
-                    <div class="popup-ingredients"></div>
-                    <div class="popup-appliance"></div>
-                    <div class="popup-ustensils"></div>
-
-                </div>
-                <div id="results" class="results">
-                    <div class="ingredients-results">
-                        <div class="input">
-                            <input id="ingredients-search" class="active" type="text" placeholder="Ingredient">
-                            <i class="fas fa-angle-up"></i>
-                            <i class="fas fa-angle-down active"></i>
-                        </div>
-                        <ul class="ingredients-results-list"></ul>
-                    </div>
-                    <div class="appliance-results">
-                        <div class="input">
-                            <input id="appliance-search" class="active" type="text" placeholder="Appareil">
-                            <i class="fas fa-angle-up"></i>
-                            <i class="fas fa-angle-down active"></i>
-                        </div>
-                        <ul class="appliance-results-list"></ul>
-                    </div>
-                    <div class="ustensils-results">
-                        <div class="input">
-                            <input id="ustensils-search" class="active" type="text" placeholder="Ustensiles">
-                            <i class="fas fa-angle-up"></i>
-                            <i class="fas fa-angle-down active"></i>
-                        </div>
-                        <ul class="ustensils-results-list"></ul>
-                    </div>
-
-                </div>
-              
-
-            </section>
-            <section class="recipesCards"></section>
-        </main>
-        <script src="polyfill.bundle.js"></script>
-        <script src="app.bundle.js"></script>  
-    </body>
-
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<link
+			href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+		/>
+		<title>Les petits plats</title>
+	</head>
+	<body>
+		<header class="header">
+			<h1 class="logo">
+				<img class="logoImg" src="./assets/logo.png" alt="Logo" />
+			</h1>
+			<div class="searchBar">
+				<input
+					class="searchBarInput"
+					type="text"
+					placeholder="Rechercher une recette"
+				/>
+				<i class="fas fa-magnifying-glass"></i>
+			</div>
+		</header>
+		<main>
+			<section id="filter" class="filter">
+				<div id="popup" class="popup">
+					<div class="popup-ingredients"></div>
+					<div class="popup-appliance"></div>
+					<div class="popup-ustensils"></div>
+				</div>
+				<div id="results" class="results">
+					<div class="ingredients-results">
+						<div class="input">
+							<input
+								id="ingredients-search"
+								class="active"
+								type="text"
+								placeholder="Ingredients"
+							/>
+							<i class="fas fa-angle-up"></i>
+							<i class="fas fa-angle-down active"></i>
+						</div>
+						<ul class="ingredients-results-list"></ul>
+					</div>
+					<div class="appliance-results">
+						<div class="input">
+							<input
+								id="appliance-search"
+								class="active"
+								type="text"
+								placeholder="Appareils"
+							/>
+							<i class="fas fa-angle-up"></i>
+							<i class="fas fa-angle-down active"></i>
+						</div>
+						<ul class="appliance-results-list"></ul>
+					</div>
+					<div class="ustensils-results">
+						<div class="input">
+							<input
+								id="ustensils-search"
+								class="active"
+								type="text"
+								placeholder="Ustensiles"
+							/>
+							<i class="fas fa-angle-up"></i>
+							<i class="fas fa-angle-down active"></i>
+						</div>
+						<ul class="ustensils-results-list"></ul>
+					</div>
+				</div>
+			</section>
+			<section class="recipesCards"></section>
+		</main>
+		<script src="polyfill.bundle.js"></script>
+		<script src="app.bundle.js"></script>
+	</body>
 </html>

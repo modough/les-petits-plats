@@ -1,23 +1,15 @@
-import { displayRecipes, displayFilter } from '../index';
-import createElementDOM from './genericDom';
+import listFactory from '../factories/listFactory';
+import { displayRecipes, buildListDOM } from '../index';
+import showPopups from './showPopups';
 
 export const filter = (data, type) => {
-	const list = document.querySelectorAll(`.${type}`);
-	const searchInput = document.querySelector(`#${type}-search`);
-	const popup = document.querySelector(`.popup-${type}`);
-	const closeFont = createElementDOM('i', '', 'fas fa-close');
+	const linkList = document.querySelectorAll(`.${type}`);
 
-	//close popup
-	closeFont.addEventListener('click', () => {
-		popup.classList.remove('active');
-	});
+	const searchInput = document.querySelector(`#${type}-search`);
 
 	//eventListeners
-	list.forEach((elmt) => {
+	linkList.forEach((elmt) => {
 		elmt.addEventListener('click', (e) => {
-			popup.classList.add('active');
-			popup.textContent = e.target.innerText;
-			popup.appendChild(closeFont);
 			const elementValue = e.target.innerText.toLowerCase();
 			const filterList = data.filter(
 				(recipe) =>
@@ -35,24 +27,17 @@ export const filter = (data, type) => {
 
 	searchInput.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
-		console.log(inputValue);
-
-		const filterInput = data.filter(
-			(recipe) =>
-				recipe.ustensils.some((elmt) =>
-					elmt.toLowerCase().includes(inputValue)
-				) ||
-				recipe.appliance.toLowerCase().includes(inputValue) ||
-				recipe.ingredients.some((elmt) =>
-					elmt.ingredient.toLowerCase().includes(inputValue)
-				)
+		const model = listFactory(data, type);
+		const arrayWithoutDuplicate = model.createFlatList();
+		const filteredList = arrayWithoutDuplicate.filter(
+			(entry) => (type && entry.toLowerCase().includes(inputValue))
 		);
+		const newListModel = listFactory(filteredList, type);
+		const linkDom = newListModel.getListDOM();
+		buildListDOM(linkDom, type);
 
-		console.log(filterInput);
-
-		displayFilter(filterInput, 'appliance', false);
-		displayFilter(filterInput, 'ustensils');
-		displayFilter(filterInput, 'ingredients', true, 'ingredient');
 	});
+
+	showPopups(type);
 };
 export default filter;
