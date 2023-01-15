@@ -1,6 +1,7 @@
 import createElementDOM from '../utils/genericDom';
 
 export const listFactory = (data, type) => {
+	// factory for default lists
 	const getListDOM = () => {
 		const spanList = createElementDOM(
 			'span',
@@ -13,6 +14,7 @@ export const listFactory = (data, type) => {
 		});
 		return spanList;
 	};
+	// transfroming database arrays into characters without duplicate
 	const createFlatList = () => {
 		const flatArray = data
 			.map((recipe) => {

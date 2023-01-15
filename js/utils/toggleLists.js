@@ -1,172 +1,85 @@
 export const toggleLists = () => {
+	const inputIngredients = document.querySelector('.ingredients-input');
+	const inputAppliance = document.querySelector('.appliance-input');
+	const inputUstensils = document.querySelector('.ustensils-input');
+	const buttonIngredients = document.querySelector('.ingredients-btn');
+	const buttonAppliance = document.querySelector('.appliance-btn');
+	const buttonUstensils = document.querySelector('.ustensils-btn');
+	const iconIngredientsList = document.querySelector(
+		'.ingredients-input .fas.fa-angle-up'
+	);
+	const iconApplianceList = document.querySelector(
+		'.appliance-input .fas.fa-angle-up'
+	);
+	const iconUstensilsList = document.querySelector(
+		'.ustensils-input .fas.fa-angle-up'
+	);
 	//open the lists function
 	const openLists = () => {
-		const searchIngredients = document.querySelector('#ingredients-search');
-		const searchAppliance = document.querySelector('#appliance-search');
-		const searchUstensils = document.querySelector('#ustensils-search');
-		const ingredientsList = document.querySelector('.ingredients-results-list');
-		const applianceList = document.querySelector('.appliance-results-list');
-		const ustensilsList = document.querySelector('.ustensils-results-list');
-		const iconUpIngredients = document.querySelector(
-			'.ingredients-results .fas.fa-angle-up'
-		);
-		const iconUpAppliance = document.querySelector(
-			'.appliance-results .fas.fa-angle-up'
-		);
-		const iconUpUstensils = document.querySelector(
-			'.ustensils-results .fas.fa-angle-up'
-		);
-		const iconDownIngredients = document.querySelector(
-			'.ingredients-results .fas.fa-angle-down'
-		);
-		const iconDownAppliance = document.querySelector(
-			'.appliance-results .fas.fa-angle-down'
-		);
-		const iconDownUstensils = document.querySelector(
-			'.ustensils-results .fas.fa-angle-down'
-		);
-		//generic function
 		const handleOpen = (
 			list,
-			otherList,
-			anotherList,
-			upIcon,
-			downIcon,
-			otherListUpIcon,
-			otherListDownIcon,
-			anotherListUpIcon,
-			anotherListDowIcon
+			firstRemovedList,
+			secondRemovedList,
+			button,
+			firstRemovedButton,
+			secondRemovedButton
 		) => {
 			list.classList.add('active');
-			if (list.classList.contains('active')) {
-				otherList.classList.remove('active');
-				anotherList.classList.remove('active');
-				upIcon.classList.add('active');
-				downIcon.classList.remove('active');
-				otherListUpIcon.classList.remove('active');
-				otherListDownIcon.classList.add('active');
-				anotherListUpIcon.classList.remove('active');
-				anotherListDowIcon.classList.add('active');
-			}
+			firstRemovedList.classList.remove('active');
+			secondRemovedList.classList.remove('active');
+			button.classList.add('hide');
+			firstRemovedButton.classList.remove('hide');
+			secondRemovedButton.classList.remove('hide');
 		};
-		// on click events
-		searchIngredients.addEventListener('click', () => {
+		buttonIngredients.addEventListener('click', () => {
 			handleOpen(
-				ingredientsList,
-				applianceList,
-				ustensilsList,
-				iconUpIngredients,
-				iconDownIngredients,
-				iconUpAppliance,
-				iconDownAppliance,
-				iconUpUstensils,
-				iconDownUstensils
+				inputIngredients,
+				inputAppliance,
+				inputUstensils,
+				buttonIngredients,
+				buttonAppliance,
+				buttonUstensils
 			);
 		});
-
-		searchAppliance.addEventListener('click', () => {
+		buttonAppliance.addEventListener('click', () => {
 			handleOpen(
-				applianceList,
-				ingredientsList,
-				ustensilsList,
-				iconUpAppliance,
-				iconDownAppliance,
-				iconUpIngredients,
-				iconDownIngredients,
-				iconUpUstensils,
-				iconDownUstensils
+				inputAppliance,
+				inputUstensils,
+				inputIngredients,
+				buttonAppliance,
+				buttonIngredients,
+				buttonUstensils
 			);
 		});
-
-		searchUstensils.addEventListener('click', () => {
+		buttonUstensils.addEventListener('click', () => {
 			handleOpen(
-				ustensilsList,
-				applianceList,
-				ingredientsList,
-				iconUpUstensils,
-				iconDownUstensils,
-				iconUpAppliance,
-				iconDownAppliance,
-				iconUpIngredients,
-				iconDownIngredients
+				inputUstensils,
+				inputIngredients,
+				inputAppliance,
+				buttonUstensils,
+				buttonIngredients,
+				buttonAppliance
 			);
 		});
 	};
+
 	// close lists function
 	const closeLists = () => {
-		const iconIngredientsList = document.querySelector(
-			'.ingredients-results .fas.fa-angle-up'
-		);
-		const iconAppareilsList = document.querySelector(
-			'.appliance-results .fas.fa-angle-up'
-		);
-		const iconUstensilsList = document.querySelector(
-			'.ustensils-results .fas.fa-angle-up'
-		);
-		const ingredientsList = document.querySelector('.ingredients-results-list');
-		const applianceList = document.querySelector('.appliance-results-list');
-		const ustensilsList = document.querySelector('.ustensils-results-list');
-		const iconDownIngredients = document.querySelector(
-			'.ingredients-results .fas.fa-angle-down'
-		);
-		const iconDownAppliance = document.querySelector(
-			'.appliance-results .fas.fa-angle-down'
-		);
-		const iconDownUstensils = document.querySelector(
-			'.ustensils-results .fas.fa-angle-down'
-		);
-		const searchIngredients = document.querySelector('#ingredients-search');
-		const searchAppliance = document.querySelector('#appliance-search');
-		const searchUstensils = document.querySelector('#ustensils-search');
-
-		// generic function
 		const handleClose = (
 			list,
-			searchInList,
-			searchInSecondList,
-			searchInThirdList,
-			iconUp,
-			iconDown
+			button
 		) => {
 			list.classList.remove('active');
-			searchInList.classList.add('active');
-			searchInSecondList.classList.add('active');
-			searchInThirdList.classList.add('active');
-			iconUp.classList.remove('active');
-			iconDown.classList.add('active');
+			button.classList.remove('hide');
 		};
-		// onclick events
 		iconIngredientsList.addEventListener('click', () => {
-			handleClose(
-				ingredientsList,
-				searchIngredients,
-				searchAppliance,
-				searchUstensils,
-				iconIngredientsList,
-				iconDownIngredients
-			);
+			handleClose(inputIngredients, buttonIngredients);
 		});
-
-		iconAppareilsList.addEventListener('click', () => {
-			handleClose(
-				applianceList,
-				searchAppliance,
-				searchIngredients,
-				searchUstensils,
-				iconAppareilsList,
-				iconDownAppliance
-			);
+		iconApplianceList.addEventListener('click', () => {
+			handleClose(inputAppliance, buttonAppliance);
 		});
-
 		iconUstensilsList.addEventListener('click', () => {
-			handleClose(
-				ustensilsList,
-				searchUstensils,
-				searchAppliance,
-				searchIngredients,
-				iconUstensilsList,
-				iconDownUstensils
-			);
+			handleClose(inputUstensils, buttonUstensils);
 		});
 	};
 	openLists();

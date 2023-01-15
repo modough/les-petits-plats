@@ -1,4 +1,5 @@
 import createElementDOM from '../utils/genericDom';
+// factory for default recipes
 export const recipeFactory = (data) => {
 	const getRecipeCardDOM = () => {
 		const recipesParentDiv = createElementDOM('div', '', 'recipesParentDiv');

@@ -4,6 +4,7 @@ import toggleLists from './utils/toggleLists';
 import recipes from './data/recipes';
 import filter from './utils/filter';
 
+//display all recipes
 export const displayRecipes = (data) => {
 	const section = document.querySelector('.recipesCards');
 	section.innerHTML = '';
@@ -16,20 +17,16 @@ export const displayRecipes = (data) => {
 };
 
 
-//reinject new list
-export const buildListDOM = (element, type) => {
-	const parentDiv = document.querySelector(`.${type}-results-list`);
-	parentDiv.innerHTML = '';
-	parentDiv.appendChild(element);
-};
-
+//display all lists
 export const displayFilter = (data,
 	type,
 ) => {
+	const parentDiv = document.querySelector(`.${type}-results-list`);
 	const model = listFactory(data, type);
 	model.createFlatList();
 	const linkDOM = model.getListDOM();
-	buildListDOM(linkDOM, type);
+	parentDiv.innerHTML = '';
+	parentDiv.appendChild(linkDOM);
 };
 
 const init = () => {
