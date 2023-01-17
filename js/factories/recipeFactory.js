@@ -43,7 +43,7 @@ export const recipeFactory = (data) => {
 				);
 				const ingredientUnit = createElementDOM(
 					'p',
-					elmt.unit ? `${elmt.unit}` : null,
+					elmt.unit ? `${elmt.unit.slice(0, 4)}` : null,
 					'ingredientUnit'
 				);
 				ingredientsLi.appendChild(ingredientName);
@@ -63,7 +63,6 @@ export const recipeFactory = (data) => {
 			cardDescriptionBottom.appendChild(recipeDescription);
 			recipesParentDiv.appendChild(article);
 		});
-
 		return recipesParentDiv;
 	};
 	return { getRecipeCardDOM };

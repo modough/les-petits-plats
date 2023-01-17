@@ -25,15 +25,11 @@ export const listFactory = (data, type) => {
 					return recipe[type].map((i) => i.toLowerCase());
 				}
 				return recipe[type].toLowerCase();
-
 			})
 			.flat();
-
-		data = [...new Set(flatArray)];
+		data = [...new Set(flatArray.sort((a, b) => a.localeCompare(b)))];
 		return data;
-
 	};
-
 	return { getListDOM, createFlatList };
 };
 export default listFactory;

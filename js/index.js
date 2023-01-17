@@ -6,34 +6,35 @@ import filter from './utils/filter';
 
 //display all recipes
 export const displayRecipes = (data) => {
+	const recipeModel = recipeFactory(data);
+	const recipeCardDOM = recipeModel.getRecipeCardDOM();
+	buildRecipeCardDOM(recipeCardDOM);
+};
+const buildRecipeCardDOM = (element) => {
 	const section = document.querySelector('.recipesCards');
 	section.innerHTML = '';
-	const dataRecipes = data.map((elmt) => {
-		return elmt;
-	});
-	const recipeModel = recipeFactory(dataRecipes);
-	const recipeCardDOM = recipeModel.getRecipeCardDOM();
-	section.appendChild(recipeCardDOM);
+	section.appendChild(element);
 };
 
 
 //display all lists
-export const displayFilter = (data,
-	type,
-) => {
+export const displayLists = (data, type) => {
+	const listModel = listFactory(data, type);
+	listModel.createFlatList();
+	const linkDOM = listModel.getListDOM();
+	buildListDOM(linkDOM, type);
+};
+export const buildListDOM = (element, type) => {
 	const parentDiv = document.querySelector(`.${type}-results-list`);
-	const model = listFactory(data, type);
-	model.createFlatList();
-	const linkDOM = model.getListDOM();
 	parentDiv.innerHTML = '';
-	parentDiv.appendChild(linkDOM);
+	parentDiv.appendChild(element);
 };
 
 const init = () => {
 	displayRecipes(recipes);
-	displayFilter(recipes, 'ingredients');
-	displayFilter(recipes, 'appliance');
-	displayFilter(recipes, 'ustensils');
+	displayLists(recipes, 'ingredients');
+	displayLists(recipes, 'appliance');
+	displayLists(recipes, 'ustensils');
 	toggleLists();
 	filter(recipes, 'ingredients');
 	filter(recipes, 'appliance');

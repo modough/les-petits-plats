@@ -16,6 +16,7 @@ export const showPopups = (type) => {
 			popup.classList.add('active');
 			popup.textContent = e.target.innerText;
 			popup.appendChild(closeFont);
+
 		});
 	});
 

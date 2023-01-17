@@ -232,6 +232,7 @@ ul::-webkit-scrollbar {
 .ustensils,
 .ingredients {
 	color: white;
+	cursor: pointer;
 }
 .appliance::first-letter,
 .ustensils::first-letter,
@@ -268,7 +269,7 @@ ul::-webkit-scrollbar {
 }
 .cardDescription {
 	background-color: lightgrey;
-	padding: 10px 30px;
+	padding: 10px 20px;
 	border-radius: 0 0 5px 5px;
 	height: 250px;
 }
@@ -319,6 +320,9 @@ ul::-webkit-scrollbar {
 	font-weight: bold;
 	max-height: 30px;
 	overflow-y: hidden;
+}
+.ingredientName::-webkit-scrollbar {
+	display: none;
 }
 .ingredientQuantity {
 	padding: 0 3px 0 10px;
