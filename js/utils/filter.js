@@ -5,6 +5,7 @@ import showPopups from './showPopups';
 export const filter = (data, type) => {
 	const linkList = document.querySelectorAll(`.${type}`);
 	const searchInput = document.querySelector(`#${type}-search`);
+	const mainSearch = document.querySelector('#mainSearch');
 
 	// recipes filter function
 	const createFilterList = (element) => {
@@ -29,7 +30,7 @@ export const filter = (data, type) => {
 		createFilterList(elementValue);
 	};
 
-	// filter while typing elements on input
+	// filter while typing elements on input with tags
 	const filterWithInput = (e) => {
 		//default lists of all elements for filter recipes
 		const inputValue = e.target.value.toLowerCase();
@@ -47,6 +48,12 @@ export const filter = (data, type) => {
 		showPopups(type);
 	};
 
+	// filter while typing on main search bar
+	const filterOnMainSearchBar = (e) => {
+		const inputValue = e.target.value;
+		createFilterList(inputValue);
+	};
+
 	//eventListeners
 	linkList.forEach((elmt) => {
 		elmt.addEventListener('click', (e) => {
@@ -55,6 +62,9 @@ export const filter = (data, type) => {
 	});
 	searchInput.addEventListener('keyup', (e) => {
 		filterWithInput(e);
+	});
+	mainSearch.addEventListener('keyup', (e) => {
+		filterOnMainSearchBar(e);
 	});
 	showPopups(type);
 
