@@ -1,18 +1,18 @@
 import listFactory from '../factories/listFactory';
 import { buildListDOM, displayRecipes } from '../index';
-import showPopups from './showPopups';
+import showTags from './showTags';
 
 export const filter = (data, type) => {
-	const linkList = document.querySelectorAll(`.${type}`);
+	const linkList = document.querySelectorAll(`li.${type}`);
 	const searchInput = document.querySelector(`#${type}-search`);
 	const mainSearch = document.querySelector('#mainSearch');
 
 	// recipes filter function
 	const createFilterList = (element) => {
+
 		const filterList = data.filter(
 			(recipe) =>
-				recipe.description.toLowerCase().includes(element) ||
-				recipe.name.toLowerCase().includes(element) ||
+
 				recipe.appliance.toLowerCase().includes(element) ||
 				recipe.ustensils
 					.map((ustensil) => ustensil.toLowerCase())
@@ -22,17 +22,34 @@ export const filter = (data, type) => {
 					.includes(element)
 		);
 		displayRecipes(filterList);
+
 	};
 
 	// filter while clicking on the elements
-	const filterOnclickLink = (e) => {
-		const elementValue = e.target.innerText.toLowerCase();
-		createFilterList(elementValue);
-	};
+	//const filterOnclickLink = (e) => {
+
+	//};
 
 	// filter while typing elements on input with tags
-	const filterWithInput = (e) => {
-		//default lists of all elements for filter recipes
+	//const filterWithInput = (e) => {
+	//default lists of all elements for filter recipes
+
+	//};
+
+	// filter while typing on main search bar
+	//const filterOnMainSearchBar = (e) => {
+
+	//};
+
+	//eventListeners
+	linkList.forEach((elmt) => {
+		elmt.addEventListener('click', (e) => {
+			const inputValue = e.target.innerText.toLowerCase();
+			createFilterList(inputValue);
+		});
+	});
+
+	searchInput.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
 		createFilterList(inputValue);
 
@@ -45,29 +62,15 @@ export const filter = (data, type) => {
 		const newListModel = listFactory(filteredList, type);
 		const linkDOM = newListModel.getListDOM();
 		buildListDOM(linkDOM, type);
-		showPopups(type);
-	};
+		showTags(type);
+	});
 
-	// filter while typing on main search bar
-	const filterOnMainSearchBar = (e) => {
+	mainSearch.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value;
 		createFilterList(inputValue);
-	};
+	});
 
-	//eventListeners
-	linkList.forEach((elmt) => {
-		elmt.addEventListener('click', (e) => {
-			filterOnclickLink(e);
-		});
-	});
-	searchInput.addEventListener('keyup', (e) => {
-		filterWithInput(e);
-	});
-	mainSearch.addEventListener('keyup', (e) => {
-		filterOnMainSearchBar(e);
-	});
-	showPopups(type);
-
+	showTags(type);
 
 };
 export default filter;

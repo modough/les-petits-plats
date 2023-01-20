@@ -66,28 +66,33 @@ body {
 	display: flex;
 	gap: 15px;
 }
-#popup > div {
+#popup > ul {
 	display: none;
 }
-#popup > div.active {
+#popup > ul.active {
 	display: flex;
 	flex-direction: row;
 	gap: 15px;
 	align-items: baseline;
-	padding: 20px;
+}
+#popup > ul > li {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	padding: 15px;
 	border-radius: 5px;
 	color: white;
 }
-#popup > .fas {
+#popup > ul > li > i.far.fa-circle-xmark {
 	font-size: 20px;
 }
-.popup-ingredients {
+.tag-ingredients {
 	background-color: #3282f7;
 }
-.popup-appliance {
+.tag-appliance {
 	background-color: #68d9a4;
 }
-.popup-ustensils {
+.tag-ustensils {
 	background-color: #ed6454;
 }
 /*------- results --------*/
