@@ -4,6 +4,7 @@ import toggleLists from './utils/toggleLists';
 import recipes from './data/recipes';
 import filter from './utils/filter';
 
+
 //display all recipes
 export const displayRecipes = (data) => {
 	const recipeModel = recipeFactory(data);
@@ -39,5 +40,6 @@ const init = () => {
 	filter(recipes, 'ingredients');
 	filter(recipes, 'appliance');
 	filter(recipes, 'ustensils');
+
 };
 init();

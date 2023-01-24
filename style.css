@@ -66,16 +66,16 @@ body {
 	display: flex;
 	gap: 15px;
 }
-#popup > ul {
+#popup {
 	display: none;
 }
-#popup > ul.active {
+#popup.active {
 	display: flex;
 	flex-direction: row;
 	gap: 15px;
 	align-items: baseline;
 }
-#popup > ul > li {
+#popup li {
 	display: flex;
 	align-items: center;
 	gap: 15px;
@@ -83,7 +83,7 @@ body {
 	border-radius: 5px;
 	color: white;
 }
-#popup > ul > li > i.far.fa-circle-xmark {
+#popup > li > i.far.fa-circle-xmark {
 	font-size: 20px;
 }
 .tag-ingredients {
