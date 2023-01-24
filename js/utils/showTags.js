@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import createElementDOM from './genericDom';
-import { displayRecipes } from '../index';
+
 
 
 export const showTags = (data, type) => {
@@ -28,7 +28,7 @@ export const showTags = (data, type) => {
 			elmt.style.display = 'block';
 		});
 	};
-	const combinedFilter = (element, type) => {
+	/*const combinedFilter = (element, type) => {
 		const combinedList = data.filter(
 			(recipe) =>
 				type && recipe.appliance.toLowerCase().includes(element) ||
@@ -40,14 +40,31 @@ export const showTags = (data, type) => {
 					.includes(element)
 		);
 		displayRecipes(combinedList);
+	};*/
+
+	const combinedTags = () => {
+		let newList = [];
+		const newLink = document.querySelectorAll(`li.tag-${type}`);
+		console.log(newLink);
+		newLink.forEach(tag => {
+			newList.push(tag.innerText.toLowerCase());
+		});
+		console.log(newList);
+		const combinedIngredients = data.filter(recipe => recipe.ingredients
+			.map((ingredient) => ingredient.ingredient.toLowerCase().includes(newList)));
+		console.log(combinedIngredients);
 	};
+
+
+
 
 	// show tags on click
 	linkList.forEach((elmt) => {
 		elmt.addEventListener('click', (e) => {
-			const inputValue = e.target.innerText.toLowerCase();
+			//const inputValue = e.target.innerText.toLowerCase();
 			openAndCloseTags(elmt, e);
-			combinedFilter(inputValue, type);
+			//combinedFilter(inputValue, type);
+			combinedTags(type, e);
 
 		});
 	});
