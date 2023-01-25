@@ -2,6 +2,12 @@ import createElementDOM from '../utils/genericDom';
 
 export const listFactory = (data, type) => {
 	// factory for default lists
+	/**
+	 * It creates a span element, then loops through the data array and creates a list element for each
+	 * item in the array, then appends the list element to the span element, and finally returns the span
+	 * element.
+	 * @returns the spanList.
+	 */
 	const getListDOM = () => {
 		const spanList = createElementDOM(
 			'span',
@@ -27,7 +33,8 @@ export const listFactory = (data, type) => {
 				return recipe[type].toLowerCase();
 			})
 			.flat();
-		data = [...new Set(flatArray.sort((a, b) => a.localeCompare(b)))];
+		const sortFlatArray = flatArray.sort((a, b) => a.localeCompare(b));
+		data = [...new Set(sortFlatArray)];
 		return data;
 	};
 	return { getListDOM, createFlatList };

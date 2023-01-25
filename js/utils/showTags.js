@@ -2,7 +2,7 @@
 import createElementDOM from './genericDom';
 import { displayRecipes } from '../index';
 
-
+let inputValues = [];
 
 export const showTags = (data, type) => {
 	const linkList = document.querySelectorAll(`li.${type}`);
@@ -18,7 +18,6 @@ export const showTags = (data, type) => {
 		popup.classList.add('active');
 		elmt.style.display = 'none';
 
-
 		//close tags
 		closeTags(closeFont, elmt);
 	};
@@ -27,35 +26,31 @@ export const showTags = (data, type) => {
 		closeFont.addEventListener('click', (e) => {
 			e.target.parentElement.style.display = 'none';
 			elmt.style.display = 'block';
+			const indexToRemove = inputValues.indexOf(elmt.innerText.toLowerCase());
+			inputValues.splice(indexToRemove, 1);
+			combinedFilter(inputValues, type);
 		});
 	};
-	const combinedFilter = (element, type) => {
-		const combinedList = data.filter(
-			(recipe) =>
-				type && recipe.appliance.toLowerCase().includes(element) ||
-				type && recipe.ustensils
-					.map((ustensil) => ustensil.toLowerCase())
-					.includes(element) ||
-				type && recipe.ingredients
-					.map((ingredient) => ingredient.ingredient.toLowerCase())
-					.includes(element)
-		);
-		displayRecipes(combinedList);
+	const combinedFilter = (inputValues, type) => {
+		let filteredValues = [];
+		for (let i in inputValues) {
+			const combinedList = data.filter(
+				(recipe) =>
+					type && recipe.appliance.toLowerCase().includes(inputValues[i]) ||
+					type && recipe.ustensils
+						.map((ustensil) => ustensil.toLowerCase())
+						.includes(inputValues[i]) ||
+					type && recipe.ingredients
+						.map((ingredient) => ingredient.ingredient.toLowerCase())
+						.includes(inputValues[i])
+			);
+			filteredValues = [...new Set([...filteredValues, ...combinedList])];
+		}
+
+		displayRecipes(filteredValues?.length ? filteredValues : data);
 	};
 
-	/*const combinedTags = () => {
-		let newList = [];
-		const newLink = document.querySelectorAll(`li.tag-${type}`);
-		console.log(newLink);
-		newLink.forEach(tag => {
-			newList.push(tag.innerText.toLowerCase());
-			const combinedIngredients = data.filter(recipe => recipe.ingredients
-				.map((ingredient) => ingredient.ingredient.toLowerCase().includes(tag.innerText.toLowerCase())));
-			console.log(combinedIngredients);
-		});
-		console.log(newList);
 
-	};*/
 
 
 
@@ -64,10 +59,9 @@ export const showTags = (data, type) => {
 	linkList.forEach((elmt) => {
 		elmt.addEventListener('click', (e) => {
 			const inputValue = e.target.innerText.toLowerCase();
+			inputValues.push(inputValue);
 			openAndCloseTags(elmt, e);
-			combinedFilter(inputValue, type);
-			//combinedTags(type, e);
-
+			combinedFilter(inputValues, type);
 		});
 	});
 };
