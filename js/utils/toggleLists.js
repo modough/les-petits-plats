@@ -1,3 +1,6 @@
+/**
+ * It opens and closes the lists when the user clicks on the buttons
+ */
 export const toggleLists = () => {
 	const inputIngredients = document.querySelector('.ingredients-input');
 	const inputAppliance = document.querySelector('.appliance-input');
@@ -16,6 +19,17 @@ export const toggleLists = () => {
 	);
 	//open the lists function
 	const openLists = () => {
+		/**
+		 * This function adds the class 'active' to the list that is passed in, removes the class 'active'
+		 * from the first and second removed lists, adds the class 'hide' to the button that is passed in,
+		 * removes the class 'hide' from the first and second removed buttons, and returns nothing.
+		 * @param list - the list that you want to open
+		 * @param firstRemovedList - The list that is currently active and needs to be removed.
+		 * @param secondRemovedList - the list that is not active and needs to be removed
+		 * @param button - the button that was clicked
+		 * @param firstRemovedButton - The button that is to be removed when the first list is opened.
+		 * @param secondRemovedButton - the button that is to be removed when the list is opened
+		 */
 		const handleOpen = (
 			list,
 			firstRemovedList,
@@ -31,6 +45,7 @@ export const toggleLists = () => {
 			firstRemovedButton.classList.remove('hide');
 			secondRemovedButton.classList.remove('hide');
 		};
+
 		buttonIngredients.addEventListener('click', () => {
 			handleOpen(
 				inputIngredients,
@@ -65,6 +80,12 @@ export const toggleLists = () => {
 
 	// close lists function
 	const closeLists = () => {
+		/**
+		 * When the user clicks the close button, remove the active class from the list and remove the hide
+		 * class from the button.
+		 * @param list - The list element that contains the list items.
+		 * @param button - The button that was clicked to open the list.
+		 */
 		const handleClose = (
 			list,
 			button
@@ -72,6 +93,7 @@ export const toggleLists = () => {
 			list.classList.remove('active');
 			button.classList.remove('hide');
 		};
+
 		iconIngredientsList.addEventListener('click', () => {
 			handleClose(inputIngredients, buttonIngredients);
 		});

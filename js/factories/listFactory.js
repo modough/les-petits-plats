@@ -1,5 +1,11 @@
 import createElementDOM from '../utils/genericDom';
 
+/**
+ * It takes an array of objects, and returns an array of strings
+ * @param data - an array of objects.
+ * @param type - the type of list you want to create.
+ * @returns An object with two methods.
+ */
 export const listFactory = (data, type) => {
 	// factory for default lists
 	/**
@@ -21,6 +27,10 @@ export const listFactory = (data, type) => {
 		return spanList;
 	};
 	// transfroming database arrays into characters without duplicate
+	/**
+	 * It takes an array of objects, and returns an array of strings.
+	 * @returns An array of strings.
+	 */
 	const createFlatList = () => {
 		const flatArray = data
 			.map((recipe) => {
