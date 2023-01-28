@@ -27,7 +27,7 @@ export const createFilteredList = (element, data) => {
 export const filter = (data, type) => {
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const searchInput = document.querySelector(`#${type}-search`);
-	//const mainSearch = document.querySelector('#mainSearch');
+	const mainSearch = document.querySelector('#mainSearch');
 
 	// recipes filter function
 	const refreshList = (inputValue) => {
@@ -58,13 +58,13 @@ export const filter = (data, type) => {
 
 	});
 
-	// first algorithm
-	//mainSearch.addEventListener('keyup', (e) => {
-	//const inputValue = e.target.value.toLowerCase();
-	//createFilterList(inputValue, data);
-	// creating new lists of filtered elements 
-	//refreshList(inputValue);
-	//});
+	//first algorithm
+	mainSearch.addEventListener('keyup', (e) => {
+		const inputValue = e.target.value.toLowerCase();
+		createFilteredList(inputValue, data);
+		//creating new lists of filtered elements 
+		refreshList(inputValue);
+	});
 
 	showTags(data, type);
 
