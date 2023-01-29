@@ -44,7 +44,10 @@ export const listFactory = (data, type) => {
 			})
 			.flat();
 		const sortFlatArray = flatArray.sort((a, b) => a.localeCompare(b));
+
 		data = [...new Set(sortFlatArray)];
+		console.log(data);
+
 		return data;
 	};
 	return { getListDOM, createFlatList };

@@ -88,7 +88,7 @@ export const recipes = [
 				unit: 'ml',
 			},
 			{
-				ingredient: 'Coulis de tomate',
+				ingredient: 'Coulis de tomates',
 				quantity: 25,
 				unit: 'cl',
 			},
@@ -744,7 +744,7 @@ export const recipes = [
 				quantity: 2,
 			},
 			{
-				ingredient: 'Coulis de tomate',
+				ingredient: 'Coulis de tomates',
 				quantity: 300,
 				unit: 'grammes',
 			},
@@ -1712,7 +1712,7 @@ export const recipes = [
 		servings: 4,
 		ingredients: [
 			{
-				ingredient: 'Bananes',
+				ingredient: 'Banane',
 				quantity: 2,
 			},
 			{
