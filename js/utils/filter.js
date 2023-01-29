@@ -61,9 +61,15 @@ export const filter = (data, type) => {
 	//first algorithm
 	mainSearch.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
-		createFilteredList(inputValue, data);
-		//creating new lists of filtered elements 
-		refreshList(inputValue);
+		if (inputValue.length >= 3) {
+			createFilteredList(inputValue, data);
+			//creating new lists of filtered elements 
+			refreshList(inputValue);
+		}
+		if (inputValue.length === 0) {
+			refreshList(inputValue);
+		}
+
 	});
 
 	showTags(data, type);
