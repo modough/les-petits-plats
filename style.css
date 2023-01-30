@@ -177,7 +177,7 @@ body {
 }
 
 .input input {
-	width: 90%;
+	width: auto;
 	color: white;
 	cursor: text;
 }
@@ -218,6 +218,7 @@ input::placeholder {
 	border-radius: 5px;
 	left: 0;
 	top: 60px;
+	z-index: 100;
 }
 #results .input ul span {
 	width: 45%;
@@ -348,4 +349,19 @@ ul.ustensils-results-list::-webkit-scrollbar {
 }
 .cardRecipe::-webkit-scrollbar {
 	display: none;
+}
+@media screen and (max-width: 1049px) {
+	#results {
+		flex-direction: column;
+	}
+}
+@media screen and (max-width: 601px) {
+	body {
+		padding: 50px;
+	}
+}
+@media screen and (max-width: 501px) {
+	.card {
+		width: 300px;
+	}
 }

@@ -28,25 +28,28 @@ export const showTags = (data, type) => {
 			elmt.style.display = 'block';
 			const indexToRemove = inputValuesArray.indexOf(elmt.innerText.toLowerCase());
 			inputValuesArray.splice(indexToRemove, 1);
-			combinedTagsFunction(inputValuesArray, type);
+			combinedTagsFunction(inputValuesArray);
 
 		});
 	};
 
-	const combinedTagsFunction = (inputValuesArray, type) => {
+	const combinedTagsFunction = (inputValuesArray) => {
 		let filteredValues = [];
 		for (let i = inputValuesArray.length; i--;) {
 			const combinedList = data.filter(
 				(recipe) =>
-					type && recipe.appliance.toLowerCase().includes(inputValuesArray[i]) ||
-					type && recipe.ustensils
+					recipe.appliance.toLowerCase().includes(inputValuesArray[i]) ||
+					recipe.ustensils
 						.map((ustensil) => ustensil.toLowerCase())
 						.includes(inputValuesArray[i]) ||
-					type && recipe.ingredients
+					recipe.ingredients
 						.map((ingredient) => ingredient.ingredient.toLowerCase())
 						.includes(inputValuesArray[i])
+
 			);
 			filteredValues = [...new Set([...filteredValues, ...combinedList])];
+			console.log(filteredValues);
+			return filteredValues;
 
 		};
 		displayRecipes(filteredValues?.length ? filteredValues : data);
@@ -58,8 +61,7 @@ export const showTags = (data, type) => {
 			const inputValue = e.target.innerText.toLowerCase();
 			inputValuesArray.push(inputValue);
 			openAndCloseTags(elmt, e);
-			combinedTagsFunction(inputValuesArray, type);
-
+			combinedTagsFunction(inputValuesArray);
 		});
 	});
 };

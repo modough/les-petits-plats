@@ -1,5 +1,5 @@
 import listFactory from '../factories/listFactory';
-import { buildListDOM, displayRecipes } from '../index';
+import { buildListDOM, displayLists, displayRecipes } from '../index';
 import showTags from './showTags';
 
 
@@ -10,7 +10,6 @@ import showTags from './showTags';
  * @param element - the value of the input field
  * @param data - the array of objects that I'm filtering through
  */
-
 
 export const createFilteredList = (element, data) => {
 	const filterList = data.filter(
@@ -26,13 +25,22 @@ export const createFilteredList = (element, data) => {
 					.includes(element))
 	);
 	displayRecipes(filterList);
+
+
+	displayLists(filterList, 'ingredients');
+	displayLists(filterList, 'appliance');
+	displayLists(filterList, 'ustensils');
+
+
 	return filterList;
 };
+
 
 export const filter = (data, type) => {
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const searchInput = document.querySelector(`#${type}-search`);
 	const mainSearch = document.querySelector('#mainSearch');
+
 	// recipes filter function
 	const refreshSearchList = (inputValue) => {
 		const model = listFactory(data, type);
@@ -49,13 +57,17 @@ export const filter = (data, type) => {
 	linkList.forEach((elmt) => {
 		elmt.addEventListener('click', (e) => {
 			const inputValue = e.target.innerText.toLowerCase();
-			createFilteredList(inputValue, data);
+			createFilteredList(inputValue, data, type);
+			showTags(data, 'ingredients');
+			showTags(data, 'appliance');
+			showTags(data, 'ustensils');
+			refreshSearchList(inputValue);
 		});
 	});
 
 	searchInput.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
-		createFilteredList(inputValue, data);
+		createFilteredList(inputValue, data, type);
 		// creating new lists of filtered elements 
 		refreshSearchList(inputValue);
 
