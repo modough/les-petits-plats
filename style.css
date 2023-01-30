@@ -276,9 +276,8 @@ ul.ustensils-results-list::-webkit-scrollbar {
 }
 .noListDiv.active {
 	display: flex;
-	align-items: center;
-	justify-content: center;
 	font-size: 30px;
+	font-weight: bolder;
 }
 .cardImg {
 	background-color: grey;

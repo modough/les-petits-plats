@@ -13,6 +13,7 @@ import createElementDOM from './utils/genericDom';
  * @param data - the data object that is returned from the API call.
  */
 export const displayRecipes = (data) => {
+
 	const recipeModel = recipeFactory(data);
 	const recipeCardDOM = recipeModel.getRecipeCardDOM();
 	buildRecipeCardDOM(recipeCardDOM, data);
