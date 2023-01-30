@@ -29,7 +29,7 @@ export const createFilteredList = (element, data) => {
 export const filter = (data, type) => {
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const searchInput = document.querySelector(`#${type}-search`);
-	//const mainSearch = document.querySelector('#mainSearch');
+	const mainSearch = document.querySelector('#mainSearch');
 
 	// recipes filter function
 	const refreshSearchList = (inputValue) => {
