@@ -23,7 +23,6 @@ export const createFilteredList = (element, data) => {
 					.map((ingredient) => ingredient.ingredient.toLowerCase())
 					.includes(element))
 	);
-	console.log(filterList);
 	displayRecipes(filterList);
 };
 
@@ -61,13 +60,44 @@ export const filter = (data, type) => {
 
 	});
 
-	// first algorithm
-	//mainSearch.addEventListener('keyup', (e) => {
-	//const inputValue = e.target.value.toLowerCase();
-	//createFilterList(inputValue, data);
-	// creating new lists of filtered elements 
-	//refreshList(inputValue);
-	//});
+	// second algorithm
+
+	mainSearch.addEventListener('keyup', (e) => {
+		const inputValue = e.target.value.toLowerCase();
+		//createFilteredList(inputValue, data);
+		let mainSearchArray = [];
+		const mainSearchFunction = () => {
+
+			for (let i = 0; i < data.length; i++) {
+
+				if (data[i].name.toLowerCase().includes(inputValue) ||
+					data[i].description.toLowerCase().includes(inputValue)) {
+					mainSearchArray.push(data[i]);
+				}
+				for (let j in data[i].ingredients) {
+					const ingredientsData = data[i].ingredients[j]
+						.ingredient.toLowerCase();
+					if (ingredientsData
+						.includes(inputValue)) {
+						mainSearchArray.push(data[i]);
+					};
+				};
+
+			};
+
+			return mainSearchArray;
+
+		};
+
+		const mainSearchFunctionList = mainSearchFunction();
+		displayRecipes(mainSearchFunctionList);
+
+
+
+		// creating new lists of filtered elements 
+		refreshSearchList(inputValue);
+
+	});
 
 	showTags(data, type);
 
