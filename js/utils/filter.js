@@ -2,12 +2,14 @@ import listFactory from '../factories/listFactory';
 import { buildListDOM, displayRecipes } from '../index';
 import showTags from './showTags';
 
+
 /**
  * It takes an element and a data array as arguments, then filters the data array based on the element
  * and returns a new array.
  * @param element - the value of the input field
  * @param data - the array of objects that I'm filtering through
  */
+
 export const createFilteredList = (element, data) => {
 	const filterList = data.filter(
 		(recipe) =>
@@ -21,16 +23,17 @@ export const createFilteredList = (element, data) => {
 					.map((ingredient) => ingredient.ingredient.toLowerCase())
 					.includes(element))
 	);
+	console.log(filterList);
 	displayRecipes(filterList);
 };
 
 export const filter = (data, type) => {
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const searchInput = document.querySelector(`#${type}-search`);
-	const mainSearch = document.querySelector('#mainSearch');
+	//const mainSearch = document.querySelector('#mainSearch');
 
 	// recipes filter function
-	const refreshList = (inputValue) => {
+	const refreshSearchList = (inputValue) => {
 		const model = listFactory(data, type);
 		const newFlatArray = model.createFlatList();
 		const filteredList = newFlatArray.filter(
@@ -54,28 +57,17 @@ export const filter = (data, type) => {
 		const inputValue = e.target.value.toLowerCase();
 		createFilteredList(inputValue, data);
 		// creating new lists of filtered elements 
-		refreshList(inputValue);
+		refreshSearchList(inputValue);
 
 	});
 
-	//first algorithm
-	mainSearch.addEventListener('keyup', (e) => {
-		const inputValue = e.target.value.toLowerCase();
-		if (inputValue.length >= 3 || inputValue.length === 0) {
-			//mainSeachFunction
-			const filterMainSearchList = data.filter(
-				(recipe) =>
-					recipe.name.toLowerCase().includes(inputValue) ||
-					recipe.description.toLowerCase().includes(inputValue) ||
-					recipe.ingredients
-						.map((ingredient) => ingredient.ingredient.toLowerCase())
-						.includes(inputValue)
-			);
-			displayRecipes(filterMainSearchList);
-			//creating new lists of filtered elements 
-			refreshList(inputValue);
-		}
-	});
+	// first algorithm
+	//mainSearch.addEventListener('keyup', (e) => {
+	//const inputValue = e.target.value.toLowerCase();
+	//createFilterList(inputValue, data);
+	// creating new lists of filtered elements 
+	//refreshList(inputValue);
+	//});
 
 	showTags(data, type);
 
