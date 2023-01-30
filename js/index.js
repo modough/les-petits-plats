@@ -12,7 +12,6 @@ import filter from './utils/filter';
  * @param data - the data object that is returned from the API call.
  */
 export const displayRecipes = (data) => {
-
 	const recipeModel = recipeFactory(data);
 	const recipeCardDOM = recipeModel.getRecipeCardDOM();
 	buildRecipeCardDOM(recipeCardDOM);
