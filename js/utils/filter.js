@@ -64,12 +64,10 @@ export const filter = (data, type) => {
 
 	mainSearch.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
-		//createFilteredList(inputValue, data);
 		let mainSearchArray = [];
 		const mainSearchFunction = () => {
 
 			for (let i = 0; i < data.length; i++) {
-
 				if (data[i].name.toLowerCase().includes(inputValue) ||
 					data[i].description.toLowerCase().includes(inputValue)) {
 					mainSearchArray.push(data[i]);
@@ -82,21 +80,13 @@ export const filter = (data, type) => {
 						mainSearchArray.push(data[i]);
 					};
 				};
-
 			};
-
 			return mainSearchArray;
-
 		};
-
 		const mainSearchFunctionList = mainSearchFunction();
 		displayRecipes(mainSearchFunctionList);
-
-
-
 		// creating new lists of filtered elements 
 		refreshSearchList(inputValue);
-
 	});
 
 	showTags(data, type);

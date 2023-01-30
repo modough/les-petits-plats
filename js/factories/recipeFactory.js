@@ -8,8 +8,6 @@ import createElementDOM from '../utils/genericDom';
 export const recipeFactory = (data) => {
 	const getRecipeCardDOM = () => {
 		const recipesParentDiv = createElementDOM('div', '', 'recipesParentDiv');
-		const noListDiv = createElementDOM('div', `Aucune recette ne correspond à votre critère… vous pouvez
-			chercher « tarte aux pommes », « poisson », etc.`, 'noListDiv');
 		data.forEach((item) => {
 			const article = createElementDOM('article', '', 'card');
 
@@ -70,7 +68,6 @@ export const recipeFactory = (data) => {
 			cardDescriptionBottom.appendChild(ingredientsList);
 			cardDescriptionBottom.appendChild(recipeDescription);
 			recipesParentDiv.appendChild(article);
-			recipesParentDiv.appendChild(noListDiv);
 		});
 		return recipesParentDiv;
 	};
