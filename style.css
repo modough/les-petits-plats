@@ -271,7 +271,6 @@ ul.ustensils-results-list::-webkit-scrollbar {
 	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 	gap: 50px;
 }
-<<<<<<< HEAD
 .noListDiv {
 	display: none;
 }
@@ -281,8 +280,6 @@ ul.ustensils-results-list::-webkit-scrollbar {
 	justify-content: center;
 	font-size: 30px;
 }
-=======
->>>>>>> e8c5e46 (main search function finished)
 .cardImg {
 	background-color: grey;
 	min-height: 230px;

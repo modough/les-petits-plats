@@ -60,7 +60,7 @@ export const filter = (data, type) => {
 
 	});
 
-	// second algorithm
+	// first algorithm
 
 	mainSearch.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
@@ -88,6 +88,8 @@ export const filter = (data, type) => {
 		// creating new lists of filtered elements 
 		refreshSearchList(inputValue);
 	});
+
+
 
 	showTags(data, type);
 
