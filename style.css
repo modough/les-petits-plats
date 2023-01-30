@@ -271,7 +271,14 @@ ul.ustensils-results-list::-webkit-scrollbar {
 	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 	gap: 50px;
 }
-
+.noListDiv {
+	display: none;
+}
+.noListDiv.active {
+	display: flex;
+	font-size: 30px;
+	font-weight: bolder;
+}
 .cardImg {
 	background-color: grey;
 	min-height: 230px;
