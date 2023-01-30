@@ -23,7 +23,6 @@ export const createFilteredList = (element, data) => {
 					.map((ingredient) => ingredient.ingredient.toLowerCase())
 					.includes(element))
 	);
-	console.log(filterList);
 	displayRecipes(filterList);
 };
 
@@ -94,6 +93,7 @@ export const filter = (data, type) => {
 
 		const mainSearchFunctionList = mainSearchFunction();
 		displayRecipes(mainSearchFunctionList);
+
 
 
 		// creating new lists of filtered elements 
