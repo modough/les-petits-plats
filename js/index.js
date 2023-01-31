@@ -34,6 +34,7 @@ const buildRecipeCardDOM = (element, data) => {
 	if (data.length === 0) {
 		noList.classList.add('active');
 	}
+
 };
 
 

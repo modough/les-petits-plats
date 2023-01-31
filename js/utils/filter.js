@@ -62,14 +62,23 @@ export const filter = (data, type) => {
 	mainSearch.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
 		if (inputValue.length >= 3) {
-			createFilteredList(inputValue, data);
+			//mainSeachFunction
+			const filterMainSearchList = data.filter(
+				(recipe) =>
+					recipe.name.toLowerCase().includes(inputValue) ||
+					recipe.description.toLowerCase().includes(inputValue) ||
+					recipe.ingredients
+						.map((ingredient) => ingredient.ingredient.toLowerCase())
+						.includes(inputValue)
+			);
+			displayRecipes(filterMainSearchList);
 			//creating new lists of filtered elements 
 			refreshList(inputValue);
 		}
 		if (inputValue.length === 0) {
+			createFilteredList(inputValue, data);
 			refreshList(inputValue);
 		}
-
 	});
 
 	showTags(data, type);
