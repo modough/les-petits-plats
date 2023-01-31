@@ -68,11 +68,11 @@ export const filter = (data, type) => {
 		const inputValue = e.target.value.toLowerCase();
 		let mainSearchArray = [];
 		const mainSearchFunction = () => {
-
 			for (let i = 0; i < data.length; i++) {
 				if (data[i].name.toLowerCase().includes(inputValue) ||
 					data[i].description.toLowerCase().includes(inputValue)) {
 					mainSearchArray.push(data[i]);
+					mainSearchArray = [...new Set(mainSearchArray)];
 				}
 				for (let j in data[i].ingredients) {
 					const ingredientsData = data[i].ingredients[j]
@@ -80,15 +80,18 @@ export const filter = (data, type) => {
 					if (ingredientsData
 						.includes(inputValue)) {
 						mainSearchArray.push(data[i]);
+						mainSearchArray = [...new Set(mainSearchArray)];
 					};
 				};
 			};
 			return mainSearchArray;
 		};
 		const mainSearchFunctionList = mainSearchFunction();
-		displayRecipes(mainSearchFunctionList);
-		// creating new lists of filtered elements 
-		refreshSearchList(inputValue);
+		if (inputValue.length >= 3 || inputValue.length === 0) {
+			displayRecipes(mainSearchFunctionList);
+			// creating new lists of filtered elements 
+			refreshSearchList(inputValue);
+		}
 	});
 
 	showTags(data, type);
