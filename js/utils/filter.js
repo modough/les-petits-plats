@@ -11,15 +11,13 @@ import showTags from './showTags';
 export const createFilteredList = (element, data) => {
 	const filterList = data.filter(
 		(recipe) =>
-			recipe.name.toLowerCase().includes(element) ||
-			recipe.description.toLowerCase().includes(element) ||
-			(recipe.appliance.toLowerCase().includes(element) ||
-				recipe.ustensils
-					.map((ustensil) => ustensil.toLowerCase())
-					.includes(element) ||
-				recipe.ingredients
-					.map((ingredient) => ingredient.ingredient.toLowerCase())
-					.includes(element))
+			recipe.appliance.toLowerCase().includes(element) ||
+			recipe.ustensils
+				.map((ustensil) => ustensil.toLowerCase())
+				.includes(element) ||
+			recipe.ingredients
+				.map((ingredient) => ingredient.ingredient.toLowerCase())
+				.includes(element)
 	);
 	displayRecipes(filterList);
 };
@@ -27,7 +25,6 @@ export const createFilteredList = (element, data) => {
 export const filter = (data, type) => {
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const searchInput = document.querySelector(`#${type}-search`);
-	//const mainSearch = document.querySelector('#mainSearch');
 
 	// recipes filter function
 	const refreshList = (inputValue) => {
@@ -57,15 +54,6 @@ export const filter = (data, type) => {
 		refreshList(inputValue);
 
 	});
-
-	// first algorithm
-	//mainSearch.addEventListener('keyup', (e) => {
-	//const inputValue = e.target.value.toLowerCase();
-	//createFilterList(inputValue, data);
-	// creating new lists of filtered elements 
-	//refreshList(inputValue);
-	//});
-
 	showTags(data, type);
 
 };
