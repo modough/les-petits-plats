@@ -61,7 +61,7 @@ export const filter = (data, type) => {
 	//first algorithm
 	mainSearch.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
-		if (inputValue.length >= 3) {
+		if (inputValue.length >= 3 || inputValue.length === 0) {
 			//mainSeachFunction
 			const filterMainSearchList = data.filter(
 				(recipe) =>
@@ -73,10 +73,6 @@ export const filter = (data, type) => {
 			);
 			displayRecipes(filterMainSearchList);
 			//creating new lists of filtered elements 
-			refreshList(inputValue);
-		}
-		if (inputValue.length === 0) {
-			createFilteredList(inputValue, data);
 			refreshList(inputValue);
 		}
 	});
