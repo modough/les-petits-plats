@@ -22,6 +22,12 @@ export const createFilteredList = (element, data) => {
 	displayRecipes(filterList);
 };
 
+/**
+ * It takes in an array of objects, and a string, and returns a filtered list of objects based on the
+ * string.  
+ * @param data - an array of objects
+ * @param type - the type of data you want to filter (recipes, ingredients, etc)
+ */
 export const filter = (data, type) => {
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const searchInput = document.querySelector(`#${type}-search`);

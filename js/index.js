@@ -19,8 +19,9 @@ export const displayRecipes = (data) => {
 };
 
 /**
- * The buildRecipeCardDOM function takes in a recipe object and returns a recipe card element.
- * @param element - the HTML element that you want to append to the DOM
+ * It takes two arguments, an element and data, and then it does some stuff
+ * @param element - the element to be appended to the DOM
+ * @param data - an array of objects
  */
 const buildRecipeCardDOM = (element, data) => {
 	const section = document.querySelector('.recipesCards');
@@ -34,8 +35,6 @@ const buildRecipeCardDOM = (element, data) => {
 		noList.classList.add('active');
 	}
 };
-
-
 //display all lists
 /**
  * This function takes in a data object and a type string, creates a list model object, creates a flat
