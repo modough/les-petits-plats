@@ -83,6 +83,7 @@ export const filter = (data, type) => {
 						.includes(inputValue)) {
 						mainSearchArray.push(data[i]);
 						mainSearchArray = [...new Set(mainSearchArray)];
+						console.log(mainSearchArray);
 					};
 				};
 			};
