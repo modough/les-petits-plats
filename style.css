@@ -63,10 +63,6 @@ body {
 /*-------- popup -----*/
 
 #popup {
-	display: flex;
-	gap: 15px;
-}
-#popup {
 	display: none;
 }
 #popup.active {
