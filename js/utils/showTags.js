@@ -7,7 +7,6 @@ export const showTags = (data, type) => {
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const popup = document.querySelector('#popup');
 
-
 	const openAndCloseTags = (elmt, e) => {
 		const tag = createElementDOM('li', '', `tag-${type}`);
 		const paragraph = createElementDOM('p', `${e.target.innerText}`, `paragraph-${type}`);
@@ -17,7 +16,6 @@ export const showTags = (data, type) => {
 		popup.appendChild(tag);
 		popup.classList.add('active');
 		elmt.style.display = 'none';
-
 		/* Adding an event listener to the closeFont element. */
 		closeTags(closeFont, elmt);
 	};
@@ -29,30 +27,28 @@ export const showTags = (data, type) => {
 			const indexToRemove = inputValuesArray.indexOf(elmt.innerText.toLowerCase());
 			inputValuesArray.splice(indexToRemove, 1);
 			combinedTagsFunction(inputValuesArray);
-
 		});
 	};
 
 	const combinedTagsFunction = (inputValuesArray) => {
 		let filteredValues = [];
-		for (let i = inputValuesArray.length; i--;) {
-			const combinedList = data.filter(
-				(recipe) =>
-					recipe.appliance.toLowerCase().includes(inputValuesArray[i]) ||
-					recipe.ustensils
+		data.forEach(element => {
+			const hasAllElements = inputValuesArray
+				.every(elem => element.ingredients
+					.map((ingredient) => ingredient.ingredient.toLowerCase())
+					.includes(elem) ||
+					element.appliance.toLowerCase()
+						.includes(elem) ||
+
+					element.ustensils
 						.map((ustensil) => ustensil.toLowerCase())
-						.includes(inputValuesArray[i]) ||
-					recipe.ingredients
-						.map((ingredient) => ingredient.ingredient.toLowerCase())
-						.includes(inputValuesArray[i])
+						.includes(elem));
 
-			);
-			filteredValues = [...new Set([...filteredValues, ...combinedList])];
-			console.log(filteredValues);
-			return filteredValues;
-
-		};
-		displayRecipes(filteredValues?.length ? filteredValues : data);
+			if (hasAllElements) {
+				filteredValues.push(element);
+			}
+		});
+		displayRecipes(filteredValues?.length ? filteredValues : []);
 	};
 
 	// show tags on click

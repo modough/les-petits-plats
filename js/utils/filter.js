@@ -14,24 +14,18 @@ import showTags from './showTags';
 export const createFilteredList = (element, data) => {
 	const filterList = data.filter(
 		(recipe) =>
-			recipe.name.toLowerCase().includes(element) ||
-			recipe.description.toLowerCase().includes(element) ||
-			(recipe.appliance.toLowerCase().includes(element) ||
-				recipe.ustensils
-					.map((ustensil) => ustensil.toLowerCase())
-					.includes(element) ||
-				recipe.ingredients
-					.map((ingredient) => ingredient.ingredient.toLowerCase())
-					.includes(element))
+			recipe.appliance.toLowerCase().includes(element) ||
+			recipe.ustensils
+				.map((ustensil) => ustensil.toLowerCase())
+				.includes(element) ||
+			recipe.ingredients
+				.map((ingredient) => ingredient.ingredient.toLowerCase())
+				.includes(element)
 	);
 	displayRecipes(filterList);
-
-
 	displayLists(filterList, 'ingredients');
 	displayLists(filterList, 'appliance');
 	displayLists(filterList, 'ustensils');
-
-
 	return filterList;
 };
 
@@ -61,7 +55,6 @@ export const filter = (data, type) => {
 			showTags(data, 'ingredients');
 			showTags(data, 'appliance');
 			showTags(data, 'ustensils');
-			refreshSearchList(inputValue);
 		});
 	});
 
@@ -70,7 +63,6 @@ export const filter = (data, type) => {
 		createFilteredList(inputValue, data, type);
 		// creating new lists of filtered elements 
 		refreshSearchList(inputValue);
-
 	});
 
 	// second algorithm
