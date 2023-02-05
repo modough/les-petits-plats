@@ -64,27 +64,15 @@ export const filter = (data, type) => {
 
 	mainSearch.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
-		let mainSearchArray = [];
-		const mainSearchFunction = () => {
-
-			for (let i = 0; i < data.length; i++) {
-				if (data[i].name.toLowerCase().includes(inputValue) ||
-					data[i].description.toLowerCase().includes(inputValue)) {
-					mainSearchArray.push(data[i]);
-				}
-				for (let j in data[i].ingredients) {
-					const ingredientsData = data[i].ingredients[j]
-						.ingredient.toLowerCase();
-					if (ingredientsData
-						.includes(inputValue)) {
-						mainSearchArray.push(data[i]);
-					};
-				};
-			};
-			return mainSearchArray;
-		};
-		const mainSearchFunctionList = mainSearchFunction();
-		displayRecipes(mainSearchFunctionList);
+		const filterMainSearchList = data.filter(
+			(recipe) =>
+				recipe.name.toLowerCase().includes(inputValue) ||
+				recipe.description.toLowerCase().includes(inputValue) ||
+				recipe.ingredients
+					.map((ingredient) => ingredient.ingredient.toLowerCase())
+					.includes(inputValue)
+		);
+		displayRecipes(filterMainSearchList);
 		// creating new lists of filtered elements 
 		refreshSearchList(inputValue);
 	});
