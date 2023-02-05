@@ -26,7 +26,6 @@ export const createFilteredList = (element, data) => {
 	displayLists(filterList, 'ingredients');
 	displayLists(filterList, 'appliance');
 	displayLists(filterList, 'ustensils');
-	return filterList;
 };
 
 
@@ -65,7 +64,8 @@ export const filter = (data, type) => {
 		refreshSearchList(inputValue);
 	});
 
-	// second algorithm
+	// -------------------------second algorithm--------------------------------
+
 	mainSearch.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
 		let mainSearchArray = [];
@@ -91,6 +91,12 @@ export const filter = (data, type) => {
 		const mainSearchFunctionList = mainSearchFunction();
 		if (inputValue.length > 2 || inputValue.length === 0) {
 			displayRecipes(mainSearchFunctionList);
+			displayLists(mainSearchFunctionList, 'ingredients');
+			displayLists(mainSearchFunctionList, 'ustensils');
+			displayLists(mainSearchFunctionList, 'appliance');
+			showTags(data, 'ingredients');
+			showTags(data, 'ustensils');
+			showTags(data, 'appliance');
 		}
 	});
 
