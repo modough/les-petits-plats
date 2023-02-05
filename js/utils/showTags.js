@@ -33,23 +33,35 @@ export const showTags = (data, type) => {
 		});
 	};
 
-	const combinedTagsFunction = (inputValuesArray, type) => {
+	const combinedTagsFunction = (inputValuesArray) => {
 		let filteredValues = [];
-		for (let i = inputValuesArray.length; i--;) {
-			const combinedList = data.filter(
-				(recipe) =>
-					type && recipe.appliance.toLowerCase().includes(inputValuesArray[i]) ||
-					type && recipe.ustensils
-						.map((ustensil) => ustensil.toLowerCase())
-						.includes(inputValuesArray[i]) ||
-					type && recipe.ingredients
-						.map((ingredient) => ingredient.ingredient.toLowerCase())
-						.includes(inputValuesArray[i])
-			);
-			filteredValues = [...new Set([...filteredValues, ...combinedList])];
+		// for (let i = C.length; i--;) {
+		// 	const combinedList = data.filter(
+		// 		(recipe) =>
+		// 			type && recipe.appliance.toLowerCase().includes(inputValuesArray[i]) ||
+		// 			type && recipe.ustensils
+		// 				.map((ustensil) => ustensil.toLowerCase())
+		// 				.includes(inputValuesArray[i]) ||
+		// 			type && recipe.ingredients
+		// 				.map((ingredient) => ingredient.ingredient.toLowerCase())
+		// 				.includes(inputValuesArray[i])
+		// 	);
+		// 	filteredValues = [...new Set([...filteredValues, ...combinedList])];
 
-		};
-		displayRecipes(filteredValues?.length ? filteredValues : data);
+		// };
+
+		data.forEach(element => {
+			const hasAllElems = inputValuesArray
+				.every(elem => element.ingredients
+					.map((ingredient) => ingredient.ingredient.toLowerCase())
+					.includes(elem));
+
+			if (hasAllElems) {
+				filteredValues.push(element);
+			}
+		});
+
+		displayRecipes(filteredValues?.length ? filteredValues : []);
 	};
 
 	// show tags on click
