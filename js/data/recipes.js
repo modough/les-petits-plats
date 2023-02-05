@@ -101,7 +101,7 @@ export const recipes = [
 				quantity: 1,
 			},
 			{
-				ingredient: "Huile d'olive",
+				ingredient: "Huile d'olives",
 				quantity: 1,
 				unit: 'cuillères à soupe',
 			},
@@ -328,7 +328,7 @@ export const recipes = [
 				ingredient: 'Vinaigre Balsamic',
 			},
 			{
-				ingredient: "Huile d'olive",
+				ingredient: "Huile d'olives",
 			},
 			{
 				ingredient: 'Basilic',
@@ -472,7 +472,7 @@ export const recipes = [
 				unit: 'cuillère à soupe',
 			},
 			{
-				ingredient: "huile d'olive",
+				ingredient: "huile d'olives",
 				quantity: 2,
 				unit: 'cuillère à soupe',
 			},
@@ -718,7 +718,7 @@ export const recipes = [
 				unit: 'grammes',
 			},
 			{
-				ingredient: "huile d'olive",
+				ingredient: "huile d'olives",
 				quantity: 1,
 				unit: 'cuillères à soupe',
 			},
@@ -1046,7 +1046,7 @@ export const recipes = [
 				quantity: 2,
 			},
 			{
-				ingredient: "Huile d'olive",
+				ingredient: "Huile d'olives",
 			},
 			{
 				ingredient: 'Paprika',
@@ -1213,7 +1213,7 @@ export const recipes = [
 				unit: 'cl',
 			},
 			{
-				ingredient: "Huile d'olive",
+				ingredient: "Huile d'olives",
 			},
 			{
 				ingredient: 'Orange',
@@ -1342,7 +1342,7 @@ export const recipes = [
 		],
 		time: 60,
 		description:
-			"Couper les courgettes dans le sens de la longueur. Vider les courgette dans un saladier. Réserver.Faire revenir la chair des courgettes dans 25cl d'huile d'olive. Ajouter l'oignon puis la viande hachée. Mettre la farce dans les courgettes. Ajouter le coulis de tomates. Mettre au four pendant 30 minutes. Avant la fin de la cuisson ajouter le fromage râpé",
+			"Couper les courgettes dans le sens de la longueur. Vider les courgette dans un saladier. Réserver.Faire revenir la chair des courgettes dans 25cl d'huile d'olives. Ajouter l'oignon puis la viande hachée. Mettre la farce dans les courgettes. Ajouter le coulis de tomates. Mettre au four pendant 30 minutes. Avant la fin de la cuisson ajouter le fromage râpé",
 		appliance: 'Four',
 		ustensils: ['couteau', 'cuillère en bois', 'Poêle à frire'],
 	},

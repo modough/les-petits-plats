@@ -34,7 +34,7 @@ export const filter = (data, type) => {
 	const searchInput = document.querySelector(`#${type}-search`);
 	const mainSearch = document.querySelector('#mainSearch');
 
-	// recipes filter function
+	//  filter function for advanced search lists
 	const refreshSearchList = (inputValue) => {
 		const model = listFactory(data, type);
 		const newFlatArray = model.createFlatList();
@@ -54,12 +54,16 @@ export const filter = (data, type) => {
 			showTags(data, 'ingredients');
 			showTags(data, 'appliance');
 			showTags(data, 'ustensils');
+
 		});
 	});
 
 	searchInput.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
 		createFilteredList(inputValue, data, type);
+		showTags(data, 'ingredients');
+		showTags(data, 'appliance');
+		showTags(data, 'ustensils');
 		// creating new lists of filtered elements 
 		refreshSearchList(inputValue);
 	});
@@ -88,15 +92,10 @@ export const filter = (data, type) => {
 			};
 			return mainSearchArray;
 		};
+
 		const mainSearchFunctionList = mainSearchFunction();
 		if (inputValue.length > 2 || inputValue.length === 0) {
 			displayRecipes(mainSearchFunctionList);
-			displayLists(mainSearchFunctionList, 'ingredients');
-			displayLists(mainSearchFunctionList, 'ustensils');
-			displayLists(mainSearchFunctionList, 'appliance');
-			showTags(data, 'ingredients');
-			showTags(data, 'ustensils');
-			showTags(data, 'appliance');
 		}
 	});
 

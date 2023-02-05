@@ -4,6 +4,7 @@ import { displayRecipes } from '../index';
 let inputValuesArray = [];
 
 export const showTags = (data, type) => {
+	const mainSearch = document.querySelector('#mainSearch');
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const popup = document.querySelector('#popup');
 
@@ -59,6 +60,10 @@ export const showTags = (data, type) => {
 			openAndCloseTags(elmt, e);
 			combinedTagsFunction(inputValuesArray);
 		});
+	});
+	mainSearch.addEventListener('keyup', (e) => {
+		const mainInputValue = e.target.innerText.toLowerCase();
+		inputValuesArray.push(mainInputValue);
 	});
 };
 export default showTags;
