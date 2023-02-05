@@ -26,7 +26,7 @@ export const listFactory = (data, type) => {
 		});
 		return spanList;
 	};
-	// transfroming database arrays into characters without duplicate
+	// transforming database arrays into characters without duplicate
 	/**
 	 * It takes an array of objects, and returns an array of strings.
 	 * @returns An array of strings.

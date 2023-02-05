@@ -1,12 +1,16 @@
 import createElementDOM from './genericDom';
 import { displayRecipes } from '../index';
 
+
+
+/* The above code is a function that takes in two arguments, the first being the data and the second
+being the type.
+The function is then used to create tags that are displayed on the page. */
 let inputValuesArray = [];
 
 export const showTags = (data, type) => {
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const popup = document.querySelector('#popup');
-
 
 	const openAndCloseTags = (elmt, e) => {
 		const tag = createElementDOM('li', '', `tag-${type}`);
@@ -21,6 +25,13 @@ export const showTags = (data, type) => {
 		closeTags(closeFont, elmt);
 	};
 
+	/**
+	 * It takes two arguments, the first being the close button and the second being the element that
+	 * contains the text. 
+	 * The combinedTagsFunction is also called when the user clicks the "Add" button,
+	 * @param closeFont - the font awesome icon that is used to close the tag
+	 * @param elmt - the element that is being passed in.
+	 */
 	const closeTags = (closeFont, elmt) => {
 		closeFont.addEventListener('click', (e) => {
 			e.target.parentElement.style.display = 'none';
@@ -31,6 +42,11 @@ export const showTags = (data, type) => {
 		});
 	};
 
+	/**
+	 * It takes an array of strings, and checks if each string is included in the ingredients, appliance
+	 * or ustensils of each recipe. If it is, it adds the recipe to the filteredValues array.
+	 * @param inputValuesArray - an array of strings that are the values of the input field
+	 */
 	const combinedTagsFunction = (inputValuesArray) => {
 		let filteredValues = [];
 		data.forEach(element => {
@@ -40,13 +56,13 @@ export const showTags = (data, type) => {
 					.includes(elem) ||
 					element.appliance.toLowerCase()
 						.includes(elem) ||
-
 					element.ustensils
 						.map((ustensil) => ustensil.toLowerCase())
 						.includes(elem));
 
 			if (hasAllElements) {
-				filteredValues.push(element);
+				filteredValues = [...new Set([...filteredValues, element])];
+				console.log(filteredValues);
 			}
 		});
 		displayRecipes(filteredValues?.length ? filteredValues : []);

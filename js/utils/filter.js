@@ -25,32 +25,44 @@ export const createFilteredList = (element, data) => {
 	displayLists(filterList, 'ingredients');
 	displayLists(filterList, 'appliance');
 	displayLists(filterList, 'ustensils');
-	return filterList;
+	console.log(filterList);
+};
+/**
+ * It takes an input value, a data array, and a type, and then it creates a new list model, filters the
+ * list, creates a new list model, and then builds the DOM.
+ * @param inputValue - the value of the input field
+ * @param data - the original data array
+ * @param type - 'search' or 'tags'
+ */
+export const refreshSearchList = (inputValue, data, type) => {
+	const model = listFactory(data, type);
+	const newFlatArray = model.createFlatList();
+	const filteredList = newFlatArray.filter(
+		(entry) => (type && entry.toLowerCase().includes(inputValue))
+	);
+	const newListModel = listFactory(filteredList, type);
+	const linkDOM = newListModel.getListDOM();
+	buildListDOM(linkDOM, type);
+	showTags(data, type);
 };
 
+/**
+ * It filters the data based on the type of search (ingredients, appliance, ustensils) and displays the
+ * results
+ * @param data - the array of objects
+ * @param type - the type of filter (ingredients, appliance, ustensils)
+ */
 export const filter = (data, type) => {
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const searchInput = document.querySelector(`#${type}-search`);
 	const mainSearch = document.querySelector('#mainSearch');
-
-	// recipes filter function
-	const refreshSearchList = (inputValue) => {
-		const model = listFactory(data, type);
-		const newFlatArray = model.createFlatList();
-		const filteredList = newFlatArray.filter(
-			(entry) => (type && entry.toLowerCase().includes(inputValue))
-		);
-		const newListModel = listFactory(filteredList, type);
-		const linkDOM = newListModel.getListDOM();
-		buildListDOM(linkDOM, type);
-		showTags(data, type);
-	};
 
 	//eventListeners
 	linkList.forEach((elmt) => {
 		elmt.addEventListener('click', (e) => {
 			const inputValue = e.target.innerText.toLowerCase();
 			createFilteredList(inputValue, data);
+			// creating new clickable lists of filtered elements 
 			showTags(data, 'ingredients');
 			showTags(data, 'appliance');
 			showTags(data, 'ustensils');
@@ -60,12 +72,15 @@ export const filter = (data, type) => {
 	searchInput.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
 		createFilteredList(inputValue, data);
-		// creating new lists of filtered elements 
-		refreshSearchList(inputValue);
+		// creating new clickable lists of filtered elements 
+		showTags(data, 'ingredients');
+		showTags(data, 'appliance');
+		showTags(data, 'ustensils');
 
 	});
 
-	// first algorithm
+	// ----------------------first algorithm------------------------------
+
 	mainSearch.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
 		const filterMainSearchList = data.filter(
@@ -77,6 +92,7 @@ export const filter = (data, type) => {
 					.includes(inputValue)
 		);
 		displayRecipes(filterMainSearchList);
+		// creating new clickable lists of filtered elements on advanced search
 		displayLists(filterMainSearchList, 'ingredients');
 		displayLists(filterMainSearchList, 'appliance');
 		displayLists(filterMainSearchList, 'ustensils');
@@ -84,7 +100,7 @@ export const filter = (data, type) => {
 		showTags(data, 'appliance');
 		showTags(data, 'ustensils');
 		// creating new lists of filtered elements 
-		refreshSearchList(inputValue);
+		refreshSearchList(inputValue, data, type);
 	});
 	showTags(data, type);
 
