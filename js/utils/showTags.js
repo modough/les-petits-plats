@@ -17,7 +17,6 @@ export const showTags = (data, type) => {
 		popup.appendChild(tag);
 		popup.classList.add('active');
 		elmt.style.display = 'none';
-
 		/* Adding an event listener to the closeFont element. */
 		closeTags(closeFont, elmt);
 	};
@@ -29,38 +28,27 @@ export const showTags = (data, type) => {
 			const indexToRemove = inputValuesArray.indexOf(elmt.innerText.toLowerCase());
 			inputValuesArray.splice(indexToRemove, 1);
 			combinedTagsFunction(inputValuesArray, type);
-
 		});
 	};
 
 	const combinedTagsFunction = (inputValuesArray) => {
 		let filteredValues = [];
-		// for (let i = C.length; i--;) {
-		// 	const combinedList = data.filter(
-		// 		(recipe) =>
-		// 			type && recipe.appliance.toLowerCase().includes(inputValuesArray[i]) ||
-		// 			type && recipe.ustensils
-		// 				.map((ustensil) => ustensil.toLowerCase())
-		// 				.includes(inputValuesArray[i]) ||
-		// 			type && recipe.ingredients
-		// 				.map((ingredient) => ingredient.ingredient.toLowerCase())
-		// 				.includes(inputValuesArray[i])
-		// 	);
-		// 	filteredValues = [...new Set([...filteredValues, ...combinedList])];
-
-		// };
-
 		data.forEach(element => {
-			const hasAllElems = inputValuesArray
+			const hasAllElements = inputValuesArray
 				.every(elem => element.ingredients
 					.map((ingredient) => ingredient.ingredient.toLowerCase())
-					.includes(elem));
+					.includes(elem) ||
+					element.appliance.toLowerCase()
+						.includes(elem) ||
 
-			if (hasAllElems) {
+					element.ustensils
+						.map((ustensil) => ustensil.toLowerCase())
+						.includes(elem));
+
+			if (hasAllElements) {
 				filteredValues.push(element);
 			}
 		});
-
 		displayRecipes(filteredValues?.length ? filteredValues : []);
 	};
 
@@ -70,8 +58,7 @@ export const showTags = (data, type) => {
 			const inputValue = e.target.innerText.toLowerCase();
 			inputValuesArray.push(inputValue);
 			openAndCloseTags(elmt, e);
-			combinedTagsFunction(inputValuesArray, type);
-
+			combinedTagsFunction(inputValuesArray);
 		});
 	});
 };

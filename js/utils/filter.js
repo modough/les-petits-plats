@@ -1,5 +1,5 @@
 import listFactory from '../factories/listFactory';
-import { buildListDOM, displayRecipes } from '../index';
+import { buildListDOM, displayLists, displayRecipes } from '../index';
 import showTags from './showTags';
 
 
@@ -13,17 +13,19 @@ import showTags from './showTags';
 export const createFilteredList = (element, data) => {
 	const filterList = data.filter(
 		(recipe) =>
-			recipe.name.toLowerCase().includes(element) ||
-			recipe.description.toLowerCase().includes(element) ||
-			(recipe.appliance.toLowerCase().includes(element) ||
-				recipe.ustensils
-					.map((ustensil) => ustensil.toLowerCase())
-					.includes(element) ||
-				recipe.ingredients
-					.map((ingredient) => ingredient.ingredient.toLowerCase())
-					.includes(element))
+			recipe.appliance.toLowerCase().includes(element) ||
+			recipe.ustensils
+				.map((ustensil) => ustensil.toLowerCase())
+				.includes(element) ||
+			recipe.ingredients
+				.map((ingredient) => ingredient.ingredient.toLowerCase())
+				.includes(element)
 	);
 	displayRecipes(filterList);
+	displayLists(filterList, 'ingredients');
+	displayLists(filterList, 'appliance');
+	displayLists(filterList, 'ustensils');
+	return filterList;
 };
 
 export const filter = (data, type) => {
@@ -49,6 +51,9 @@ export const filter = (data, type) => {
 		elmt.addEventListener('click', (e) => {
 			const inputValue = e.target.innerText.toLowerCase();
 			createFilteredList(inputValue, data);
+			showTags(data, 'ingredients');
+			showTags(data, 'appliance');
+			showTags(data, 'ustensils');
 		});
 	});
 
@@ -61,7 +66,6 @@ export const filter = (data, type) => {
 	});
 
 	// first algorithm
-
 	mainSearch.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
 		const filterMainSearchList = data.filter(
@@ -73,12 +77,15 @@ export const filter = (data, type) => {
 					.includes(inputValue)
 		);
 		displayRecipes(filterMainSearchList);
+		displayLists(filterMainSearchList, 'ingredients');
+		displayLists(filterMainSearchList, 'appliance');
+		displayLists(filterMainSearchList, 'ustensils');
+		showTags(data, 'ingredients');
+		showTags(data, 'appliance');
+		showTags(data, 'ustensils');
 		// creating new lists of filtered elements 
 		refreshSearchList(inputValue);
 	});
-
-
-
 	showTags(data, type);
 
 };
