@@ -1,6 +1,7 @@
 import createElementDOM from './genericDom';
 import { displayRecipes } from '../index';
 
+
 let inputValuesArray = [];
 
 export const showTags = (data, type) => {
@@ -40,9 +41,12 @@ export const showTags = (data, type) => {
 					.includes(elem) ||
 					element.appliance.toLowerCase()
 						.includes(elem) ||
-
 					element.ustensils
 						.map((ustensil) => ustensil.toLowerCase())
+						.includes(elem) ||
+					element.name.toLowerCase()
+						.includes(elem) ||
+					element.description.toLowerCase()
 						.includes(elem));
 
 			if (hasAllElements) {
@@ -62,8 +66,10 @@ export const showTags = (data, type) => {
 		});
 	});
 	mainSearch.addEventListener('keyup', (e) => {
-		const mainInputValue = e.target.innerText.toLowerCase();
+		const mainInputValue = e.target.value.toLowerCase();
 		inputValuesArray.push(mainInputValue);
+
+
 	});
 };
 export default showTags;

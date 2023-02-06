@@ -27,45 +27,40 @@ export const createFilteredList = (element, data) => {
 	displayLists(filterList, 'appliance');
 	displayLists(filterList, 'ustensils');
 };
+//  filter function for advanced search lists
+export const refreshSearchList = (inputValue, data, type) => {
+	const model = listFactory(data, type);
+	const newFlatArray = model.createFlatList();
+	const filteredList = newFlatArray.filter(
+		(entry) => (type && entry.toLowerCase().includes(inputValue))
+	);
+	const newListModel = listFactory(filteredList, type);
+	const linkDOM = newListModel.getListDOM();
+	buildListDOM(linkDOM, type);
+	showTags(data, 'ingredients');
+	showTags(data, 'appliance');
+	showTags(data, 'ustensils');
 
-
+};
 export const filter = (data, type) => {
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const searchInput = document.querySelector(`#${type}-search`);
 	const mainSearch = document.querySelector('#mainSearch');
 
-	//  filter function for advanced search lists
-	const refreshSearchList = (inputValue) => {
-		const model = listFactory(data, type);
-		const newFlatArray = model.createFlatList();
-		const filteredList = newFlatArray.filter(
-			(entry) => (type && entry.toLowerCase().includes(inputValue))
-		);
-		const newListModel = listFactory(filteredList, type);
-		const linkDOM = newListModel.getListDOM();
-		buildListDOM(linkDOM, type);
-		showTags(data, type);
-	};
 	//eventListeners
 	linkList.forEach((elmt) => {
 		elmt.addEventListener('click', (e) => {
 			const inputValue = e.target.innerText.toLowerCase();
 			createFilteredList(inputValue, data, type);
-			showTags(data, 'ingredients');
-			showTags(data, 'appliance');
-			showTags(data, 'ustensils');
-
+			refreshSearchList(inputValue, data, type);
 		});
 	});
 
 	searchInput.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
 		createFilteredList(inputValue, data, type);
-		showTags(data, 'ingredients');
-		showTags(data, 'appliance');
-		showTags(data, 'ustensils');
 		// creating new lists of filtered elements 
-		refreshSearchList(inputValue);
+		refreshSearchList(inputValue, data, type);
 	});
 
 	// -------------------------second algorithm--------------------------------
@@ -74,18 +69,18 @@ export const filter = (data, type) => {
 		const inputValue = e.target.value.toLowerCase();
 		let mainSearchArray = [];
 		const mainSearchFunction = () => {
-			for (let i = 0; i < data.length; i++) {
-				if (data[i].name.toLowerCase().includes(inputValue) ||
-					data[i].description.toLowerCase().includes(inputValue)) {
-					mainSearchArray.push(data[i]);
+			for (let recipe of data) {
+				if (recipe.name.toLowerCase().includes(inputValue) ||
+					recipe.description.toLowerCase().includes(inputValue)) {
+					mainSearchArray.push(recipe);
 					mainSearchArray = [...new Set(mainSearchArray)];
 				}
-				for (let j in data[i].ingredients) {
-					const ingredientsData = data[i].ingredients[j]
+				for (let element of recipe.ingredients) {
+					const ingredientsData = element
 						.ingredient.toLowerCase();
 					if (ingredientsData
 						.includes(inputValue)) {
-						mainSearchArray.push(data[i]);
+						mainSearchArray.push(recipe);
 						mainSearchArray = [...new Set(mainSearchArray)];
 					};
 				};
@@ -97,6 +92,7 @@ export const filter = (data, type) => {
 		if (inputValue.length > 2 || inputValue.length === 0) {
 			displayRecipes(mainSearchFunctionList);
 		}
+
 	});
 
 	showTags(data, type);
