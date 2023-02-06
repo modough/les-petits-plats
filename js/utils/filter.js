@@ -1,5 +1,5 @@
 import listFactory from '../factories/listFactory';
-import { buildListDOM, displayLists, displayRecipes } from '../index';
+import { buildListDOM, displayRecipes } from '../index';
 import showTags from './showTags';
 
 
