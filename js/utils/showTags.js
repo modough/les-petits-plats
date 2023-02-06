@@ -36,16 +36,25 @@ export const showTags = (data, type) => {
 	const combinedTagsFunction = (inputValuesArray) => {
 		let filteredValues = [];
 		data.forEach(element => {
-			const hasAllElems = inputValuesArray
+			const hasAllElements = inputValuesArray
 				.every(elem => element.ingredients
 					.map((ingredient) => ingredient.ingredient.toLowerCase())
-					.includes(elem));
+					.includes(elem) ||
+					element.appliance.toLowerCase()
+						.includes(elem) ||
+					element.ustensils
+						.map((ustensil) => ustensil.toLowerCase())
+						.includes(elem) ||
+					element.name.toLowerCase()
+						.includes(elem) ||
+					element.description.toLowerCase()
+						.includes(elem));
 
-			if (hasAllElems) {
+			if (hasAllElements) {
 				filteredValues.push(element);
 			}
 		});
-		displayRecipes(filteredValues?.length ? filteredValues : data);
+		displayRecipes(filteredValues?.length ? filteredValues : []);
 	};
 
 	// show tags on click
