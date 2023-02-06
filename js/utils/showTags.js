@@ -2,13 +2,13 @@ import createElementDOM from './genericDom';
 import { displayRecipes } from '../index';
 
 
-
 /* The above code is a function that takes in two arguments, the first being the data and the second
 being the type.
 The function is then used to create tags that are displayed on the page. */
 let inputValuesArray = [];
 
 export const showTags = (data, type) => {
+	const mainSearch = document.querySelector('#mainSearch');
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const popup = document.querySelector('#popup');
 
@@ -38,7 +38,7 @@ export const showTags = (data, type) => {
 			elmt.style.display = 'block';
 			const indexToRemove = inputValuesArray.indexOf(elmt.innerText.toLowerCase());
 			inputValuesArray.splice(indexToRemove, 1);
-			combinedTagsFunction(inputValuesArray, type);
+			combinedTagsFunction(inputValuesArray);
 		});
 	};
 
@@ -58,11 +58,14 @@ export const showTags = (data, type) => {
 						.includes(elem) ||
 					element.ustensils
 						.map((ustensil) => ustensil.toLowerCase())
+						.includes(elem) ||
+					element.name.toLowerCase()
+						.includes(elem) ||
+					element.description.toLowerCase()
 						.includes(elem));
 
 			if (hasAllElements) {
-				filteredValues = [...new Set([...filteredValues, element])];
-				console.log(filteredValues);
+				filteredValues.push(element);
 			}
 		});
 		displayRecipes(filteredValues?.length ? filteredValues : []);
@@ -76,6 +79,11 @@ export const showTags = (data, type) => {
 			openAndCloseTags(elmt, e);
 			combinedTagsFunction(inputValuesArray);
 		});
+	});
+	mainSearch.addEventListener('keyup', (e) => {
+		const mainInputValue = e.target.value.toLowerCase();
+		inputValuesArray.push(mainInputValue);
+
 	});
 };
 export default showTags;

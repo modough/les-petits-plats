@@ -43,7 +43,9 @@ export const refreshSearchList = (inputValue, data, type) => {
 	const newListModel = listFactory(filteredList, type);
 	const linkDOM = newListModel.getListDOM();
 	buildListDOM(linkDOM, type);
-	showTags(data, type);
+	showTags(data, 'ingredients');
+	showTags(data, 'appliance');
+	showTags(data, 'ustensils');
 };
 
 /**
@@ -62,20 +64,14 @@ export const filter = (data, type) => {
 		elmt.addEventListener('click', (e) => {
 			const inputValue = e.target.innerText.toLowerCase();
 			createFilteredList(inputValue, data);
-			// creating new clickable lists of filtered elements 
-			showTags(data, 'ingredients');
-			showTags(data, 'appliance');
-			showTags(data, 'ustensils');
+			refreshSearchList(inputValue, data, type);
 		});
 	});
 
 	searchInput.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
 		createFilteredList(inputValue, data);
-		// creating new clickable lists of filtered elements 
-		showTags(data, 'ingredients');
-		showTags(data, 'appliance');
-		showTags(data, 'ustensils');
+		refreshSearchList(inputValue, data, type);
 
 	});
 
@@ -91,16 +87,9 @@ export const filter = (data, type) => {
 					.map((ingredient) => ingredient.ingredient.toLowerCase())
 					.includes(inputValue)
 		);
-		displayRecipes(filterMainSearchList);
-		// creating new clickable lists of filtered elements on advanced search
-		displayLists(filterMainSearchList, 'ingredients');
-		displayLists(filterMainSearchList, 'appliance');
-		displayLists(filterMainSearchList, 'ustensils');
-		showTags(data, 'ingredients');
-		showTags(data, 'appliance');
-		showTags(data, 'ustensils');
-		// creating new lists of filtered elements 
-		refreshSearchList(inputValue, data, type);
+		if (inputValue.length > 2 || inputValue.length === 0) {
+			displayRecipes(filterMainSearchList);
+		}
 	});
 	showTags(data, type);
 
