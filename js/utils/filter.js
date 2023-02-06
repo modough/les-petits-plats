@@ -1,5 +1,5 @@
 import listFactory from '../factories/listFactory';
-import { buildListDOM, displayLists, displayRecipes } from '../index';
+import { buildListDOM, displayRecipes } from '../index';
 import showTags from './showTags';
 
 
@@ -22,10 +22,6 @@ export const createFilteredList = (element, data) => {
 				.includes(element)
 	);
 	displayRecipes(filterList);
-	displayLists(filterList, 'ingredients');
-	displayLists(filterList, 'appliance');
-	displayLists(filterList, 'ustensils');
-	console.log(filterList);
 };
 /**
  * It takes an input value, a data array, and a type, and then it creates a new list model, filters the
@@ -43,9 +39,7 @@ export const refreshSearchList = (inputValue, data, type) => {
 	const newListModel = listFactory(filteredList, type);
 	const linkDOM = newListModel.getListDOM();
 	buildListDOM(linkDOM, type);
-	showTags(data, 'ingredients');
-	showTags(data, 'appliance');
-	showTags(data, 'ustensils');
+	showTags(data, type);
 };
 
 /**
@@ -64,7 +58,6 @@ export const filter = (data, type) => {
 		elmt.addEventListener('click', (e) => {
 			const inputValue = e.target.innerText.toLowerCase();
 			createFilteredList(inputValue, data);
-			refreshSearchList(inputValue, data, type);
 		});
 	});
 
