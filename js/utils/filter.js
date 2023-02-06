@@ -23,9 +23,6 @@ export const createFilteredList = (element, data) => {
 				.includes(element)
 	);
 	displayRecipes(filterList);
-	displayLists(filterList, 'ingredients');
-	displayLists(filterList, 'appliance');
-	displayLists(filterList, 'ustensils');
 };
 //  filter function for advanced search lists
 export const refreshSearchList = (inputValue, data, type) => {
@@ -37,11 +34,9 @@ export const refreshSearchList = (inputValue, data, type) => {
 	const newListModel = listFactory(filteredList, type);
 	const linkDOM = newListModel.getListDOM();
 	buildListDOM(linkDOM, type);
-	showTags(data, 'ingredients');
-	showTags(data, 'appliance');
-	showTags(data, 'ustensils');
-
+	showTags(data, type);
 };
+
 export const filter = (data, type) => {
 	const linkList = document.querySelectorAll(`li.${type}`);
 	const searchInput = document.querySelector(`#${type}-search`);
@@ -52,14 +47,13 @@ export const filter = (data, type) => {
 		elmt.addEventListener('click', (e) => {
 			const inputValue = e.target.innerText.toLowerCase();
 			createFilteredList(inputValue, data, type);
-			refreshSearchList(inputValue, data, type);
 		});
 	});
 
 	searchInput.addEventListener('keyup', (e) => {
 		const inputValue = e.target.value.toLowerCase();
 		createFilteredList(inputValue, data, type);
-		// creating new lists of filtered elements 
+		// creating new list of found element 
 		refreshSearchList(inputValue, data, type);
 	});
 
